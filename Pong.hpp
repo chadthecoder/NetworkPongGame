@@ -165,6 +165,7 @@ private:
   void Render();
   void UpdateScore();
   void StartSend();
+  void StartReceive();
 
   void centerVector2(Vector2 vec);
 
