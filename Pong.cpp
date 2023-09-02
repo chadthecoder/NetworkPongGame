@@ -27,6 +27,15 @@ void Pong::StartSend()
   // boost::array<char, 1> send_buf = {{0}};
   this->socket_.send_to(boost::asio::buffer(this->send_buf), this->receiver_endpoint);
   std::cout << "0 buff sent to server" << std::endl;
+  StartReceive();
+}
+
+void Pong::StartReceive()
+{
+  size_t len = socket.receive_from(
+  boost::asio::buffer(recv_buf), sender_endpoint);
+
+  std::cout.write(recv_buf.data(), len);
 }
 
 void Pong::centerVector2(Vector2 vec)
