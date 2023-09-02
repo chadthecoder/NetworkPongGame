@@ -9,6 +9,7 @@ int main(int argc, char *argv[])
   Pong game;
 
   bool success = game.Initialize();
+  std::cout << std::to_string(success) << std::endl;
   if (success)
   {
     game.RunLoop();
