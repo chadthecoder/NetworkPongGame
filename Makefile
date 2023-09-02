@@ -31,6 +31,8 @@ outputWin = -o "windows/$(gameName)"
 
 outputLin = -o "linux/$(gameName)"
 
+tempFlag = -fno-stack-protector
+
 win: $(dotOWin)
 	windres windows/windows.rc -O coff -o $(iconO)
 	$(cc) $(outputWin) $(dotOWin) $(iconO) $(libsWin)
@@ -48,7 +50,7 @@ lin: $(dotOLin)
 	$(cc) $(outputLin) $(dotOLin) $(libsLin)
 
 linux/main.o: main.cpp
-	$(cc) -c main.cpp -o linux/main.o
+	$(cc) -c main.cpp -o linux/main.o 
 
 linux/$(gameName).o: $(gameName).cpp
 	$(cc) -c $(gameName).cpp -o linux/$(gameName).o

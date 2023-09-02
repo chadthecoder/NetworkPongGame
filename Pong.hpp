@@ -11,11 +11,16 @@
 #include <GLFW/glfw3.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <boost/array.hpp>
+#include <boost/asio.hpp>
+
 #endif
 
 #include <string>
 #include <iostream>
 #include <cmath>
+
+using boost::asio::ip::udp;
 
 struct Vector2
 {
@@ -149,7 +154,7 @@ struct Ball
 class Pong
 {
 public:
-  Pong();
+  Pong(std::string ip);
   bool Initialize();
   void RunLoop();
   void Shutdown();
@@ -159,6 +164,7 @@ private:
   bool UpdateGame();
   void Render();
   void UpdateScore();
+  void StartSend();
 
   void centerVector2(Vector2 vec);
 
@@ -180,6 +186,11 @@ private:
   int screenHeight, screenWidth, thickness, paddleWidth, paddleHeight;
   int testyFunny = 400, leftPoints = 0, rightPoints = 0;
   SDL_Rect rectScoreLine;
+  boost::asio::io_context io_context;
+  std::string ip;
+  udp::socket socket_;
+  boost::array<char, 1> send_buf;
+  udp::endpoint receiver_endpoint;
 };
 
 #endif
