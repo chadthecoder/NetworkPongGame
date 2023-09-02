@@ -192,6 +192,9 @@ private:
   udp::socket socket_;
   boost::array<char, 1> send_buf;
   udp::endpoint receiver_endpoint;
+  boost::array<char, 128> recv_buf;
+  udp::endpoint sender_endpoint;
+  size_t len;
 };
 
 #endif
