@@ -6,6 +6,8 @@ Meant to be cross platform for Windows and Linux.
 
 # Resources:
 
+.gitignore started by https://github.com/deysanjeeb
+README.md started by https://github.com/anubhav1206
 pong icon by Icons8 (icons8.com)
 Score images by Chad Mc Adams(chadthecoder on Github)
 
