@@ -50,7 +50,8 @@ int main(int argc, char *argv[])
         std::cout << "arg: " << argv[1] << "\nip: " << ip << std::endl;
 
         Pong game(ip);
-
+        std::cout << "Game init done\n"
+                  << std::endl;
         bool success = game.Initialize();
         std::cout << std::to_string(success) << std::endl;
         if (success)

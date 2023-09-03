@@ -32,8 +32,13 @@ void Pong::StartSend()
 
 void Pong::StartReceive()
 {
-  size_t len = socket.receive_from(
-  boost::asio::buffer(recv_buf), sender_endpoint);
+  std::cout << "In startreceive\n"
+            << std::endl;
+  this->len = socket_.receive_from(
+      boost::asio::buffer(this->recv_buf), this->sender_endpoint);
+  std::cout << "lh[dshlfihdsilfhl;ds\n"
+            << len << "\n"
+            << std::endl;
 
   std::cout.write(recv_buf.data(), len);
 }

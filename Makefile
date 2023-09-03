@@ -54,9 +54,13 @@ linux/main.o: main.cpp
 
 linux/$(gameName).o: $(gameName).cpp
 	$(cc) -c $(gameName).cpp -o linux/$(gameName).o
+	g++ server.cpp -o linux/server
+
+runLinServer:
+	./linux/server
 
 runLin:
-	./linux/"$(gameName)"
+	linux/$(gameName) "127.0.0.1"
 
 cleanWin:
 	rm windows/*.o
@@ -65,3 +69,4 @@ cleanWin:
 cleanLin:
 	rm linux/*.o
 	rm linux/"$(gameName)"
+	rm linux/server
