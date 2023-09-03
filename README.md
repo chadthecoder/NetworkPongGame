@@ -30,10 +30,11 @@ sudo apt-get install libglfw3-dev
 # Read Makefilw in order to install on Linux
 
 make lin  
-make runLin  
-make cleanLin
+make runLinServer
+make runLin (In new terminal window)  
+make cleanLin (to clean when developing)
 
-# Read Makefilw in order to install on Windows
+# Read Makefilw in order to install on Windows (Out of date, needs to be tested on Windows and updated)
 
 make win  
 make runWin  
