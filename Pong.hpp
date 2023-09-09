@@ -11,8 +11,8 @@
 #include <GLFW/glfw3.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-// #include <boost/array.hpp>
-//  #include <boost/asio.hpp>
+#include <boost/array.hpp>
+#include <boost/asio.hpp>
 
 #endif
 
@@ -20,14 +20,14 @@
 #include <iostream>
 #include <cmath>
 
-#define ASIO_STANDALONE
+/* #define ASIO_STANDALONE
 #define ASIO_HAS_STD_ADDRESSOF
 #define ASIO_HAS_STD_ARRAY
 #define ASIO_HAS_CSTDINT
 #define ASIO_HAS_STD_SHARED_PTR
 #define ASIO_HAS_STD_TYPE_TRAITS
 
-#include "asio/include/asio.hpp"
+#include "asio/include/asio.hpp" */
 
 using boost::asio::ip::udp;
 
