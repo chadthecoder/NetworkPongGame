@@ -6,6 +6,10 @@ Meant to be cross platform for Windows and Linux.
 
 Multiplayer in dev branch.
 
+# Do not install SDL2 on debian if trying to build from sdl2 github
+
+Self-explanatory, breaks sdl2 image linking
+
 # Clone
 
 git clone --recurse-submodules ${ssh name}
