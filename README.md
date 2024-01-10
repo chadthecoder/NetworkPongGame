@@ -6,6 +6,10 @@ Meant to be cross platform for Windows and Linux.
 
 Multiplayer in dev branch.
 
+# Build
+
+cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=../lib/vcpkg/scripts/buildsystems/vcpkg.cmake 
+
 # Do not install SDL2 on debian if trying to build from sdl2 github
 
 Self-explanatory, breaks sdl2 image linking

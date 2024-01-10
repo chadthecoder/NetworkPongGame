@@ -34,3 +34,5 @@ linux/Pong
 linux/*.o
 windows/*.o
 windows/*.exe
+
+*/build
