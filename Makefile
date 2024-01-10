@@ -6,7 +6,7 @@ main = main.cpp
 
 linksWin = -lglew32 -lglfw3 -lgdi32 -lopengl32 -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
 
-linksLin = -lSDL2main -lSDL2 -lSDL2_image -lpthread
+linksLin = -lSDL2main -lSDL2 -lSDL2_image -pthread
 fun = -lGLEW -lglfw -lGL
 
 includeDepsWin = -I "libsWin\glew\include" -I "libsWin\glfw\include" -I "libsWin\SDL2\i686-w64-mingw32\include" -I "libsWin\SDL2_image-2.0.3\i686-w64-mingw32\include"
