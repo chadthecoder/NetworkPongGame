@@ -9,10 +9,10 @@
 #else
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <boost/array.hpp>
-#include <boost/asio.hpp>
+#include <SDL.h>
+#include <SDL_image.h>
+#define ASIO_STANDALONE
+#include <asio.hpp>
 
 #endif
 
@@ -29,7 +29,7 @@
 
 #include "asio/include/asio.hpp" */
 
-using boost::asio::ip::udp;
+//using boost::asio::ip::udp;
 
 struct Vector2
 {
@@ -196,13 +196,13 @@ private:
   int screenHeight, screenWidth, thickness, paddleWidth, paddleHeight;
   int testyFunny = 400, leftPoints = 0, rightPoints = 0;
   SDL_Rect rectScoreLine;
-  boost::asio::io_context io_context;
+  asio::io_context io_context;
   std::string ip;
-  udp::socket socket_;
-  boost::array<char, 1> send_buf;
-  udp::endpoint receiver_endpoint;
-  boost::array<char, 128> recv_buf;
-  udp::endpoint sender_endpoint;
+  asio::ip::udp::socket socket_;
+  std::array<char, 1> send_buf;
+  asio::ip::udp::endpoint receiver_endpoint;
+  std::array<char, 128> recv_buf;
+  asio::ip::udp::endpoint sender_endpoint;
   size_t len;
 };
 

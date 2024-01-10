@@ -1,12 +1,13 @@
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
-#include <boost/array.hpp>
-#include <boost/asio.hpp>
+
+#define ASIO_STANDALONE
+#include <asio.hpp>
 
 #include "Pong.hpp"
 
-using boost::asio::ip::udp;
+//using boost::asio::ip::udp;
 
 int main(int argc, char *argv[])
 {

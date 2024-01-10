@@ -16,16 +16,16 @@ Pong::Pong(std::string ip) : socket_(this->io_context), send_buf({{0}}), mIsRunn
 
 void Pong::StartSend()
 {
-  udp::resolver resolver(this->io_context);
+  asio::ip::udp::resolver resolver(this->io_context);
   std::cout << this->ip << std::endl;
   this->receiver_endpoint =
-      *resolver.resolve(udp::v4(), this->ip, "1024").begin();
+      *resolver.resolve(asio::ip::udp::v4(), this->ip, "1024").begin();
 
   // udp::socket socketOne(io_context);
-  this->socket_.open(udp::v4());
+  this->socket_.open(asio::ip::udp::v4());
 
   // boost::array<char, 1> send_buf = {{0}};
-  this->socket_.send_to(boost::asio::buffer(this->send_buf), this->receiver_endpoint);
+  this->socket_.send_to(asio::buffer(this->send_buf), this->receiver_endpoint);
   std::cout << "0 buff sent to server" << std::endl;
   StartReceive();
 }
@@ -35,7 +35,7 @@ void Pong::StartReceive()
   std::cout << "In startreceive\n"
             << std::endl;
   this->len = socket_.receive_from(
-      boost::asio::buffer(this->recv_buf), this->sender_endpoint);
+            asio::buffer(this->recv_buf), this->sender_endpoint);
   std::cout << "lh[dshlfihdsilfhl;ds\n"
             << len << "\n"
             << std::endl;

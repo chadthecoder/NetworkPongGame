@@ -11,13 +11,11 @@
 #include <ctime>
 #include <iostream>
 #include <string>
-#include <boost/array.hpp>
-#include <boost/bind/bind.hpp>
-#include <boost/shared_ptr.hpp>
-#include <boost/system/error_code.hpp>
+
+#define ASIO_STANDALONE
 #include <asio.hpp>
 
-using asio::ip::udp;
+//using asio::ip::udp;
 
 std::string make_daytime_string()
 {
@@ -30,7 +28,7 @@ class udp_server
 {
 public:
     udp_server(asio::io_context &io_context)
-        : socket_(io_context, udp::endpoint(udp::v4(), 1024))
+        : socket_(io_context, asio::ip::udp::endpoint(asio::ip::udp::v4(), 1024))
     {
         start_receive();
     }
@@ -48,7 +46,7 @@ private:
 
         socket_.async_receive_from(
             asio::buffer(recv_buffer_), remote_endpoint_,
-            boost::bind(&udp_server::handle_receive, this,
+            std::bind(&udp_server::handle_receive, this,
                         iError1,
                         recvSize));
     }
@@ -63,11 +61,11 @@ private:
         {
             day = make_daytime_string();
             sizeDay = day.size();
-            boost::shared_ptr<std::string> message(
+            std::shared_ptr<std::string> message(
                 new std::string(day));
 
             socket_.async_send_to(asio::buffer(*message), remote_endpoint_,
-                                  boost::bind(&udp_server::handle_send, this, message,
+                                  std::bind(&udp_server::handle_send, this, message,
                                               iError2,
                                               sizeDay));
 
@@ -77,18 +75,18 @@ private:
     }
 
     // what to do with info recieved?
-    void handle_send(boost::shared_ptr<std::string> /*message*/,
+    void handle_send(std::shared_ptr<std::string> /*message*/,
                      const asio::error_code & /*error*/,
                      std::size_t /*bytes_transferred*/)
     {
     }
 
-    udp::socket socket_;
-    udp::endpoint remote_endpoint_;
-    boost::array<char, 1> recv_buffer_;
+    asio::ip::udp::socket socket_;
+    asio::ip::udp::endpoint remote_endpoint_;
+    std::array<char, 1> recv_buffer_;
     std::string day;
     std::size_t recvSize = recv_buffer_.size(), sizeDay;
-    boost::system::error_code iError1, iError2;
+    std::error_code iError1, iError2;
 };
 
 int main()

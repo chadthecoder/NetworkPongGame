@@ -6,16 +6,16 @@ main = main.cpp
 
 linksWin = -lglew32 -lglfw3 -lgdi32 -lopengl32 -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
 
-linksLin = -lSDL2main -lSDL2 -lSDL2_image
-fun = -lGLEW -lglfw -lGL 
+linksLin = -lSDL2main -lSDL2 -lSDL2_image -lpthread
+fun = -lGLEW -lglfw -lGL
 
 includeDepsWin = -I "libsWin\glew\include" -I "libsWin\glfw\include" -I "libsWin\SDL2\i686-w64-mingw32\include" -I "libsWin\SDL2_image-2.0.3\i686-w64-mingw32\include"
 
-includeDepsLin = -I "libsLin\glew\include" -I "libsLin\glfw\include" -I "libsLin\SDL2\i686-w64-mingw32\include"
+includeDepsLin = -I "libsLin\glew\include" -I "libsLin\glfw\include" -I "lib/SDL/include" -I "lib/SDL_image/include"  -Iasio-1.28.0/include 
 
 linkingDepsWin = -L "libsWin\glew\lib\Release\Win32" -L "libsWin\glfw\lib-mingw" -L "libsWin\SDL2\i686-w64-mingw32\lib" -L "libsWin\SDL2_image-2.0.3\i686-w64-mingw32\lib"
 
-linkingDepsLin = -L "libsLin\glew\lib\Release\Win32" -L "libsLin\glfw\lib-mingw" -L "libsLin\SDL2\i686-w64-mingw32\lib"
+linkingDepsLin = -L "libsLin\glew\lib\Release\Win32" -L "libsLin\glfw\lib-mingw" -L "lib/SDL/build/build" -L "lib/SDL_image/build" -L "usr/local/lib"
 
 libsWin = $(includeDepsWin) $(linkingDepsWin) $(linksWin)
 
@@ -50,11 +50,11 @@ lin: $(dotOLin)
 	$(cc) $(outputLin) $(dotOLin) $(libsLin)
 
 linux/main.o: main.cpp
-	$(cc) -c main.cpp -o linux/main.o 
+	$(cc) $(libsLin) -c main.cpp -o linux/main.o
 
 linux/$(gameName).o: $(gameName).cpp
-	$(cc) -c $(gameName).cpp -o linux/$(gameName).o
-	g++ server.cpp -o linux/server
+	$(cc) $(libsLin) -c $(gameName).cpp -o linux/$(gameName).o
+	g++ $(libsLin) server.cpp -o linux/server
 
 runLinServer:
 	./linux/server

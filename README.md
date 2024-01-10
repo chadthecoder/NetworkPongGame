@@ -6,6 +6,28 @@ Meant to be cross platform for Windows and Linux.
 
 Multiplayer in dev branch.
 
+# Clone
+
+git clone --recurse-submodules ${ssh name}
+
+# Build SDL2
+
+cd lib/SDL
+mkdir build
+cd build
+../configure
+make
+sudo make install
+
+# Build SDL2 Image
+
+cd lib/SDL_image
+mkdir build
+cd build
+../configure
+make
+sudo make install
+
 # Resources:
 
 .gitignore started by https://github.com/deysanjeeb
