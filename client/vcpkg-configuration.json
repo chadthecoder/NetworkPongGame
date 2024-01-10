@@ -1,0 +1,14 @@
+{
+  "default-registry": {
+    "kind": "git",
+    "baseline": "c9919121dde6f61c0436adda94624636e041226b",
+    "repository": "https://github.com/microsoft/vcpkg"
+  },
+  "registries": [
+    {
+      "kind": "artifact",
+      "location": "https://github.com/microsoft/vcpkg-ce-catalog/archive/refs/heads/main.zip",
+      "name": "microsoft"
+    }
+  ]
+}

@@ -7,3 +7,6 @@
 	path = lib/SDL_image
 	url = https://github.com/libsdl-org/SDL_image.git
 	branch = SDL2
+[submodule "lib/vcpkg"]
+	path = lib/vcpkg
+	url = https://github.com/microsoft/vcpkg.git
