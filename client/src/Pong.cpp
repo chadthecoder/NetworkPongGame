@@ -76,6 +76,14 @@ bool Pong::Initialize()
       this->screenHeight,
       SDL_WINDOW_FULLSCREEN);
 
+  /*this->mWindow = SDL_CreateWindow(
+      "Pong Game",
+      SDL_WINDOWPOS_CENTERED,
+      SDL_WINDOWPOS_CENTERED,
+      800,
+      800,
+      0);*/
+
   if (!this->mWindow)
   {
     SDL_Log("Error: %s", SDL_GetError());

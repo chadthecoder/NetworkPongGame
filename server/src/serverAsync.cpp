@@ -30,12 +30,11 @@ class udp_server
 {
 public:
   udp_server(asio::io_context& io_context, asio::ip::port_type port_num)
-    : socket_(io_context, asio::ip::udp::endpoint(asio::ip::udp::v4(), port_num))
+    : socket_(io_context, asio::ip::udp::endpoint(asio::ip::udp::v4(), 1025))
   {
-    start_receive();
+    //start_receive();
   }
 
-private:
   void start_receive()
   {
     socket_.async_receive_from(
@@ -45,6 +44,7 @@ private:
           std::placeholders::_2));
   }
 
+private:
   void handle_receive(const asio::error_code& error,
       std::size_t /*bytes_transferred*/)
   {
@@ -57,6 +57,10 @@ private:
           std::bind(&udp_server::handle_send, this, message,
             std::placeholders::_1,
             std::placeholders::_2));
+
+            std::cout << "creating session on: " 
+                    << socket_.remote_endpoint().address().to_string() 
+                    << ":" << socket_.remote_endpoint().port() << '\n';
 
       start_receive();
     }
@@ -75,7 +79,7 @@ private:
 
 int main()
 {
-  try
+  /*try
   {
     asio::io_context io_context;
     udp_server server(io_context, 1025);
@@ -85,7 +89,23 @@ int main()
   {
     std::cout << "errorrrr brooo\n";
     std::cerr << e.what() << std::endl;
-  }
+  }*/
+
+  //while(true)
+  //{
+    try
+    {
+      asio::io_context io_context;
+      udp_server server(io_context, 1025);
+      server.start_receive();
+      io_context.run();
+    }
+    catch (std::exception& e)
+    {
+      std::cout << "errorrrr brooo\n";
+      std::cerr << e.what() << std::endl;
+    }
+  //}
 
   return 0;
 }
