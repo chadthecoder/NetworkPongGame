@@ -153,7 +153,12 @@ void Pong::Shutdown()
   SDL_Quit();
 }
 
-void Pong::RunLoop()
+bool Pong::getIsRunning()
+{
+  return mIsRunning;
+}
+
+/*void Pong::RunLoop()
 {
   while (this->mIsRunning)
   {
@@ -164,7 +169,7 @@ void Pong::RunLoop()
     }
     this->Render();
   }
-}
+}*/
 
 void Pong::UpdateScore()
 {

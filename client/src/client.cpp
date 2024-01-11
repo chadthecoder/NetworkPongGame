@@ -58,7 +58,16 @@ int main(int argc, char *argv[])
         std::cout << std::to_string(success) << std::endl;
         if (success)
         {
-            game.RunLoop();
+            while (game.getIsRunning())
+            {
+                game.ProcessInput();
+                if (!game.UpdateGame())
+                {
+                break;
+                }
+                game.Render();
+            }
+            
         }
         game.Shutdown();
     }

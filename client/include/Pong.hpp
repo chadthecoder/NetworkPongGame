@@ -165,13 +165,15 @@ class Pong
 public:
   Pong(std::string ip, std::string port);
   bool Initialize();
-  void RunLoop();
+  //void RunLoop();
   void Shutdown();
-
-private:
   void ProcessInput();
   bool UpdateGame();
   void Render();
+
+  bool getIsRunning();
+
+private:
   void UpdateScore();
   void StartSend();
   void StartReceive();
@@ -196,6 +198,7 @@ private:
   int screenHeight, screenWidth, thickness, paddleWidth, paddleHeight;
   int testyFunny = 400, leftPoints = 0, rightPoints = 0;
   SDL_Rect rectScoreLine;
+
   asio::io_context io_context;
   std::string ip;
   asio::ip::udp::socket socket_;
