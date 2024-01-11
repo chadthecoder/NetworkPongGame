@@ -199,7 +199,7 @@ private:
   asio::io_context io_context;
   std::string ip;
   asio::ip::udp::socket socket_;
-  std::array<char, 1> send_buf;
+  std::array<char, 128> send_buf;
   asio::ip::udp::endpoint receiver_endpoint;
   std::array<char, 128> recv_buf;
   asio::ip::udp::endpoint sender_endpoint;

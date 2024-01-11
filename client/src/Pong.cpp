@@ -26,7 +26,7 @@ void Pong::StartSend()
 
   // boost::array<char, 1> send_buf = {{0}};
   this->socket_.send_to(asio::buffer(this->send_buf), this->receiver_endpoint);
-  std::cout << "0 buff sent to server" << std::endl;
+  std::cout << "128 buff sent to server" << std::endl;
   StartReceive();
 }
 
