@@ -11,8 +11,8 @@ ClientNet::~ClientNet()
 SEND_REC_STRUCT ClientNet::SendAndRec(std::string)
 {}
 
-int ClientNet::StartSend(std::string)
+int ClientNet::SendMessage(std::string)
 {}
 
-REC_STRUCT ClientNet::StartReceive()
+REC_STRUCT ClientNet::ReceiveMessage()
 {}

@@ -23,8 +23,8 @@ public:
     SEND_REC_STRUCT SendAndRec(std::string);
 
 private:
-    int StartSend(std::string);
-    REC_STRUCT StartReceive();
+    int SendMessage(std::string);
+    REC_STRUCT ReceiveMessage();
 
     asio::io_context io_context;
     std::string ip;
