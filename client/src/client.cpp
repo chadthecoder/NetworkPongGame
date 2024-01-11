@@ -48,9 +48,10 @@ int main(int argc, char *argv[])
         // }
 
         std::string ip = argv[1];
+        
         std::cout << "arg: " << argv[1] << "\nip: " << ip << std::endl;
 
-        Pong game(ip);
+        Pong game(ip, "1025");
         std::cout << "Game init done\n"
                   << std::endl;
         bool success = game.Initialize();

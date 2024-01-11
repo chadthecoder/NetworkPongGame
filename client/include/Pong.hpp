@@ -163,7 +163,7 @@ struct Ball
 class Pong
 {
 public:
-  Pong(std::string ip);
+  Pong(std::string ip, std::string port);
   bool Initialize();
   void RunLoop();
   void Shutdown();
@@ -204,6 +204,7 @@ private:
   std::array<char, 128> recv_buf;
   asio::ip::udp::endpoint sender_endpoint;
   size_t len;
+  std::string port;
 };
 
 #endif

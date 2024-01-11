@@ -5,7 +5,7 @@
 SDL_Texture *textLeftScore, *textRightScore;
 SDL_Rect rectLeftSrc, rectRightSrc, rectDest;
 
-Pong::Pong(std::string ip) : socket_(this->io_context), send_buf({{0}}), mIsRunning(true), mTicksCount(0), gameBall(1500.0f, 500.0f, -100.0f, 117.5f, 15, 15), leftPoints(0), rightPoints(0)
+Pong::Pong(std::string ip, std::string port) : socket_(this->io_context), port(port), send_buf({{0}}), mIsRunning(true), mTicksCount(0), gameBall(1500.0f, 500.0f, -100.0f, 117.5f, 15, 15), leftPoints(0), rightPoints(0)
 {
   // print the ref of io_context to show that it worked for now
   // this->io_context = io_context;
@@ -19,7 +19,7 @@ void Pong::StartSend()
   asio::ip::udp::resolver resolver(this->io_context);
   std::cout << this->ip << std::endl;
   this->receiver_endpoint =
-      *resolver.resolve(asio::ip::udp::v4(), this->ip, "1024").begin();
+      *resolver.resolve(asio::ip::udp::v4(), this->ip, this->port).begin();
 
   // udp::socket socketOne(io_context);
   this->socket_.open(asio::ip::udp::v4());
@@ -83,7 +83,7 @@ bool Pong::Initialize()
   }
 
   // make window icon
-  SDL_Surface *icon = IMG_Load("pongIcon.png");
+  SDL_Surface *icon = IMG_Load("../../pongIcon.png");
 
   if (!icon)
   {
@@ -170,8 +170,8 @@ void Pong::UpdateScore()
 {
   // this->leftPoints, this->rightPoints
 
-  std::string fileLeft = "assets/imgs/num" + std::to_string(this->leftPoints) + ".png";
-  std::string fileRight = "assets/imgs/num" + std::to_string(this->rightPoints) + ".png";
+  std::string fileLeft = "../../assets/imgs/num" + std::to_string(this->leftPoints) + ".png";
+  std::string fileRight = "../../assets/imgs/num" + std::to_string(this->rightPoints) + ".png";
 
   SDL_Surface *surfaceLeftScore = IMG_Load(fileLeft.c_str());
   textLeftScore = SDL_CreateTextureFromSurface(mRenderer, surfaceLeftScore);
