@@ -50,6 +50,8 @@ private:
   {
     if (!error)
     {
+      std::cout << "rec from client: " << recv_buffer_ .data() << "\n";
+
       std::shared_ptr<std::string> message(
           new std::string(make_daytime_string()));
 
@@ -58,12 +60,9 @@ private:
             std::placeholders::_1,
             std::placeholders::_2));
 
-            char *str;
-            //sprintf(str, "%u", remote_endpoint_.port());
-
             std::cout << "creating session on: " 
                     << remote_endpoint_.address().to_string() 
-                    << ":" << remote_endpoint_.port() << ":";// << str << '\n';
+                    << ":" << remote_endpoint_.port() << "\n";// << str << '\n';
 
       start_receive();
     }
