@@ -83,7 +83,7 @@ bool Pong::Initialize()
   }
 
   // make window icon
-  SDL_Surface *icon = IMG_Load("../../pongIcon.png");
+  SDL_Surface *icon = IMG_Load("assets/imgs/pongIcon.png");
 
   if (!icon)
   {
@@ -175,8 +175,8 @@ void Pong::UpdateScore()
 {
   // this->leftPoints, this->rightPoints
 
-  std::string fileLeft = "../../assets/imgs/num" + std::to_string(this->leftPoints) + ".png";
-  std::string fileRight = "../../assets/imgs/num" + std::to_string(this->rightPoints) + ".png";
+  std::string fileLeft = "assets/imgs/num" + std::to_string(this->leftPoints) + ".png";
+  std::string fileRight = "assets/imgs/num" + std::to_string(this->rightPoints) + ".png";
 
   SDL_Surface *surfaceLeftScore = IMG_Load(fileLeft.c_str());
   textLeftScore = SDL_CreateTextureFromSurface(mRenderer, surfaceLeftScore);
