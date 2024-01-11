@@ -1,3 +1,5 @@
+#pragma once
+
 #define ASIO_STANDALONE
 #include <asio.hpp>
 
@@ -15,6 +17,11 @@ struct REC_STRUCT
         int recAns;
         std::string recString;
 };
+
+inline void handle_receive()
+{
+    return;
+}
 
 class ClientNet
 {

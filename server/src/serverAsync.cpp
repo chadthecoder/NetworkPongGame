@@ -32,7 +32,7 @@ public:
   udp_server(asio::io_context& io_context, asio::ip::port_type port_num)
     : socket_(io_context, asio::ip::udp::endpoint(asio::ip::udp::v4(), 1025))
   {
-    //start_receive();
+    start_receive();
   }
 
   void start_receive()
@@ -58,9 +58,12 @@ private:
             std::placeholders::_1,
             std::placeholders::_2));
 
+            char *str;
+            //sprintf(str, "%u", remote_endpoint_.port());
+
             std::cout << "creating session on: " 
-                    << socket_.remote_endpoint().address().to_string() 
-                    << ":" << socket_.remote_endpoint().port() << '\n';
+                    << remote_endpoint_.address().to_string() 
+                    << ":" << remote_endpoint_.port() << ":";// << str << '\n';
 
       start_receive();
     }
@@ -74,7 +77,7 @@ private:
 
   asio::ip::udp::socket socket_;
   asio::ip::udp::endpoint remote_endpoint_;
-  std::array<char, 1> recv_buffer_;
+  std::array<char, 128> recv_buffer_;
 };
 
 int main()
@@ -97,7 +100,7 @@ int main()
     {
       asio::io_context io_context;
       udp_server server(io_context, 1025);
-      server.start_receive();
+      //server.start_receive();
       io_context.run();
     }
     catch (std::exception& e)
