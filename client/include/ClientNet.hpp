@@ -17,7 +17,7 @@ struct REC_STRUCT
 class ClientNet
 {
 public:
-    ClientNet(/* args */);
+    ClientNet(std::string ip, std::string port);
     ~ClientNet();
 
     SEND_REC_STRUCT SendAndRec(std::string);

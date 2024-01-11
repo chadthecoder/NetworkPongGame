@@ -1,6 +1,6 @@
 #include <ClientNet.hpp>
 
-ClientNet::ClientNet(/* args */)
+ClientNet::ClientNet(std::string ip, std::string port)
 {
 }
 
