@@ -17,74 +17,14 @@
 #define ASIO_STANDALONE
 #include <asio.hpp>
 
-//using asio::ip::udp;
-
-std::string make_daytime_string()
-{
-  using namespace std; // For time_t, time and ctime;
-  time_t now = time(0);
-  return ctime(&now);
-}
-
-class udp_server
-{
-public:
-  udp_server(asio::io_context& io_context, asio::ip::port_type port_num)
-    : socket_(io_context, asio::ip::udp::endpoint(asio::ip::udp::v4(), 1025))
-  {
-    start_receive();
-  }
-
-  void start_receive()
-  {
-    socket_.async_receive_from(
-        asio::buffer(recv_buffer_), remote_endpoint_,
-        std::bind(&udp_server::handle_receive, this,
-          std::placeholders::_1,
-          std::placeholders::_2));
-  }
-
-private:
-  void handle_receive(const asio::error_code& error,
-      std::size_t /*bytes_transferred*/)
-  {
-    if (!error)
-    {
-      std::cout << "rec from client: " << recv_buffer_ .data() << "\n";
-
-      std::shared_ptr<std::string> message(
-          new std::string(make_daytime_string()));
-
-      socket_.async_send_to(asio::buffer(*message), remote_endpoint_,
-          std::bind(&udp_server::handle_send, this, message,
-            std::placeholders::_1,
-            std::placeholders::_2));
-
-            std::cout << "creating session on: " 
-                    << remote_endpoint_.address().to_string() 
-                    << ":" << remote_endpoint_.port() << "\n";// << str << '\n';
-
-      start_receive();
-    }
-  }
-
-  void handle_send(std::shared_ptr<std::string> /*message*/,
-      const asio::error_code& /*error*/,
-      std::size_t /*bytes_transferred*/)
-  {
-  }
-
-  asio::ip::udp::socket socket_;
-  asio::ip::udp::endpoint remote_endpoint_;
-  std::array<char, 128> recv_buffer_;
-};
+#include <UAS.hpp>
 
 int main()
 {
   /*try
   {
     asio::io_context io_context;
-    udp_server server(io_context, 1025);
+    UAS server(io_context, 1025);
     io_context.run();
   }
   catch (std::exception& e)
@@ -98,7 +38,7 @@ int main()
     try
     {
       asio::io_context io_context;
-      udp_server server(io_context, 1025);
+      UAS server(io_context, 1025);
       //server.start_receive();
       io_context.run();
     }
