@@ -59,11 +59,11 @@ int main(int argc, char *argv[])
         if (success)
         {
             ClientNet net(ip, "1025");
-
-            SEND_REC_STRUCT serverAns = net.SendAndRecMessage("hi");
+            SEND_REC_STRUCT serverAns;
+            
             while (game.getIsRunning())
             {
-                //SEND_REC_STRUCT serverAns = net.SendAndRecMessage("hi");
+                serverAns = net.SendAndRecMessage("hi");
                 std:: cout << "sendAns: " << serverAns.sendAns << "\n"
                     << "recAns: " << serverAns.recAns << "\n"
                     << "recString: " << serverAns.recString << "\n";

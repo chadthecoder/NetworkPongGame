@@ -47,10 +47,10 @@ REC_STRUCT ClientNet::RecMessage()
 
     std::cout << "In startreceive\n"
             << std::endl;
-    //this->len = socket_.receive_from();
-    socket_.async_receive_from(
+    this->len = socket_.receive_from(asio::buffer(this->recv_buf), this->sender_endpoint);
+    /*socket_.async_receive_from(
             asio::buffer(this->recv_buf), this->sender_endpoint,
-            std::bind(handle_receive));
+            std::bind(handle_receive));*/
 
     std::cout << "lh[dshlfihdsilfhl;ds\n"
             << len << "\n"
