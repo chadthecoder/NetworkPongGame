@@ -1,6 +1,8 @@
 #define ASIO_STANDALONE
 #include <asio.hpp>
 
+#include <iostream>
+
 struct SEND_REC_STRUCT
 {
         int sendAns;
@@ -20,11 +22,11 @@ public:
     ClientNet(std::string ip, std::string port);
     ~ClientNet();
 
-    SEND_REC_STRUCT SendAndRec(std::string);
+    SEND_REC_STRUCT SendAndRecMessage(std::string mess);
 
 private:
-    int SendMessage(std::string);
-    REC_STRUCT ReceiveMessage();
+    int SendMessage(std::string mess);
+    REC_STRUCT RecMessage();
 
     asio::io_context io_context;
     std::string ip;
