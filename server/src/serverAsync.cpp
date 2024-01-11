@@ -83,6 +83,7 @@ int main()
   }
   catch (std::exception& e)
   {
+    std::cout << "errorrrr brooo\n";
     std::cerr << e.what() << std::endl;
   }
 

@@ -6,6 +6,7 @@
 #include <asio.hpp>
 
 #include <Pong.hpp>
+#include <ClientNet.hpp>
 
 //using boost::asio::ip::udp;
 
@@ -52,20 +53,29 @@ int main(int argc, char *argv[])
         std::cout << "arg: " << argv[1] << "\nip: " << ip << std::endl;
 
         Pong game(ip, "1025");
-        std::cout << "Game init done\n"
-                  << std::endl;
+        std::cout << "Game init done\n";
         bool success = game.Initialize();
         std::cout << std::to_string(success) << std::endl;
         if (success)
         {
+            ClientNet net(ip, "1025");
+
             while (game.getIsRunning())
             {
+                SEND_REC_STRUCT serverAns = net.SendAndRecMessage("hi");
+                std:: cout << "sendAns: " << serverAns.sendAns << "\n"
+                    << "recAns: " << serverAns.recAns << "\n"
+                    << "recString: " << serverAns.recString << "\n";
+
                 game.ProcessInput();
+                std::cout << "ProcessInput done\n";
                 if (!game.UpdateGame())
                 {
-                break;
+                    std::cout << "not updategame\n";
+                    break;
                 }
                 game.Render();
+                std::cout << "render done\n";
             }
             
         }

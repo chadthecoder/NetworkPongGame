@@ -1,7 +1,8 @@
 #include <ClientNet.hpp>
 
-ClientNet::ClientNet(std::string ip, std::string port)
+ClientNet::ClientNet(std::string ip, std::string port) : socket_(this->io_context), ip(ip), port(port)
 {
+    this->socket_.open(asio::ip::udp::v4());
 }
 
 ClientNet::~ClientNet()
@@ -25,12 +26,12 @@ int ClientNet::SendMessage(std::string mess)
           new std::string(mess));
 
     asio::ip::udp::resolver resolver(this->io_context);
-    std::cout << this->ip << std::endl;
+    std::cout << "send mess ip: " << this->ip << std::endl;
     this->receiver_endpoint =
       *resolver.resolve(asio::ip::udp::v4(), this->ip, this->port).begin();
 
     // udp::socket socketOne(io_context);
-    this->socket_.open(asio::ip::udp::v4());
+    //this->socket_.open(asio::ip::udp::v4());
 
     // boost::array<char, 1> send_buf = {{0}};
     this->socket_.send_to(asio::buffer(*messPtr), this->receiver_endpoint);

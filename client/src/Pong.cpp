@@ -10,8 +10,8 @@ Pong::Pong(std::string ip, std::string port) : socket_(this->io_context), port(p
   // print the ref of io_context to show that it worked for now
   // this->io_context = io_context;
   this->ip = ip;
-  std::cout << &this->io_context << " " << ip << std::endl;
-  this->StartSend();
+  std::cout << "in pong construct: io-> " << &this->io_context << " " << ip << std::endl;
+  //this->StartSend();
 }
 
 void Pong::StartSend()
@@ -189,13 +189,17 @@ void Pong::UpdateScore()
 
 void Pong::ProcessInput()
 {
+  std::cout << "in process input\n";
+
   while (SDL_PollEvent(&this->event))
   {
+    std::cout << "in while loop\n";
     switch (this->event.type)
     {
-    case SDL_QUIT:
-      mIsRunning = false;
-      break;
+      case SDL_QUIT:
+        std::cout << "sdl_quit\n";
+        mIsRunning = false;
+        break;
     }
   }
 
