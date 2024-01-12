@@ -6,13 +6,6 @@ UAS::UAS(asio::io_context& io_context, asio::ip::port_type port_num)
   start_receive();
 }
 
-std::string UAS::make_daytime_string()
-{
-  using namespace std; // For time_t, time and ctime;
-  time_t now = time(0);
-  return ctime(&now);
-}
-
 void UAS::start_receive()
 {
     socket_.async_receive_from(

@@ -6,6 +6,8 @@
 
 #include <iostream>
 
+#include <utils/utils.cpp>
+
 class UAS
 {
 public:
@@ -13,8 +15,6 @@ public:
   void start_receive();
 
 private:
-  std::string make_daytime_string();
-
   void handle_receive(const asio::error_code& error,
       std::size_t /*bytes_transferred*/);
 
