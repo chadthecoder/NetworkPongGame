@@ -1,5 +1,4 @@
-#include <string>
-#include <ctime>
+#include <utils.hpp>
 
 std::string make_daytime_string()
 {

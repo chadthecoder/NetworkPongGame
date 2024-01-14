@@ -70,9 +70,37 @@ int main(int argc, char *argv[])
 
                 game.ProcessInput();
                 std::cout << "ProcessInput done\n";
-                if (!game.UpdateGame())
+                if(!game.UpdateGame()) break;
+                if (game.CheckWin() == 1)
                 {
-                    std::cout << "not updategame\n";
+                    std::cout << "not updategame\n" << game.getIsRunning() << "\n";
+                    //break;
+                }
+                else if(game.CheckWin() == 2)
+                {
+                    std::cout << "Left side wins!\n";
+                    serverAns = net.SendAndRecMessage("Left side wins!");
+                    std:: cout << "sendAns: " << serverAns.sendAns << "\n"
+                        << "recAns: " << serverAns.recAns << "\n"
+                        << "recString: " << serverAns.recString << "\n";
+                    break;
+                }
+                else if(game.CheckWin() == 3)
+                {
+                    std::cout << "Right side wins!\n";
+                    serverAns = net.SendAndRecMessage("Right side wins!");
+                    std:: cout << "sendAns: " << serverAns.sendAns << "\n"
+                        << "recAns: " << serverAns.recAns << "\n"
+                        << "recString: " << serverAns.recString << "\n";
+                    break;
+                }
+                else 
+                {
+                    //serverAns = net.SendAndRecMessage(game.UpdateGame());
+                    //std:: cout << "sendAns: " << serverAns.sendAns << "\n"
+                    //    << "recAns: " << serverAns.recAns << "\n"
+                    //    << "recString: " << serverAns.recString << "\n";
+                    std::cout << "What happened?\n";
                     break;
                 }
                 game.Render();

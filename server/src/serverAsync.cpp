@@ -14,10 +14,11 @@
 //#include <boost/array.hpp>
 //#include <boost/bind/bind.hpp>
 //#include <boost/shared_ptr.hpp>
-#define ASIO_STANDALONE
-#include <asio.hpp>
 
 #include <UAS.hpp>
+
+#define ASIO_STANDALONE
+#include <asio.hpp>
 
 int main()
 {

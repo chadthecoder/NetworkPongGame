@@ -168,9 +168,10 @@ public:
   //void RunLoop();
   void Shutdown();
   void ProcessInput();
-  bool UpdateGame();
+  int UpdateGame(); //1==continue, 2==left wins, 3==right wins
   void Render();
 
+  int CheckWin();
   bool getIsRunning();
 
 private:

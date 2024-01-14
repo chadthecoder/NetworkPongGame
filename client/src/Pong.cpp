@@ -43,6 +43,32 @@ void Pong::StartReceive()
   std::cout.write(recv_buf.data(), len);
 }
 
+int Pong::CheckWin()
+{
+  // game over because one side has 7 points
+  if (this->leftPoints == 7)
+  {
+    std::cout << "The left side wins!\n";
+    /*
+      Doesn't do anything right now since returning false stops loop, but could be used in the future.
+      this->mIsRunning = false;
+    */
+    return 2;
+  }
+
+  if (this->rightPoints == 7)
+  {
+    std::cout << "The right side wins!\n";
+    /*
+      Doesn't do anything right now since returning false stops loop, but could be used in the future.
+      this->mIsRunning = false;
+    */
+    return 3;
+  }
+
+  else { return 1; }
+}
+
 void Pong::centerVector2(Vector2 vec)
 {
   vec.x = this->screenWidth / 2;
@@ -243,7 +269,7 @@ void Pong::ProcessInput()
   }
 }
 
-bool Pong::UpdateGame()
+int Pong::UpdateGame()
 {
   while (!SDL_TICKS_PASSED(SDL_GetTicks(), this->mTicksCount + 16))
     ;
@@ -280,25 +306,26 @@ bool Pong::UpdateGame()
   }
 
   // game over because one side has 7 points
-  if (this->leftPoints == 7)
-  {
-    std::cout << "The left side wins!\n";
+  //if (this->leftPoints == 7)
+  //{
+  //  std::cout << "The left side wins!\n";
     /*
       Doesn't do anything right now since returning false stops loop, but could be used in the future.
       this->mIsRunning = false;
     */
-    return false;
-  }
+  //  return false;
+  //}
 
-  if (this->rightPoints == 7)
-  {
-    std::cout << "The right side wins!\n";
+  //if (this->rightPoints == 7)
+  //{
+  //  std::cout << "The right side wins!\n";
     /*
       Doesn't do anything right now since returning false stops loop, but could be used in the future.
       this->mIsRunning = false;
     */
-    return false;
-  }
+  //  return false;
+  //}
+
 
   // update objects using deltaTime
   this->gameBall.x += gameBall.xVelocity * this->deltaTime;
