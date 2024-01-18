@@ -102,7 +102,7 @@ int main(int argc, char *argv[])
                 else if(game.CheckWin() == 2)
                 {
                     std::cout << "Left side wins!\n";
-                    serverAns = net.SendAndRecMessage("Left side wins!");
+                    serverAns = net.SendAndRecMessage("Left side wins!!");
                     std:: cout << "sendAns: " << serverAns.sendAns << "\n"
                         << "recAns: " << serverAns.recAns << "\n"
                         << "recString: " << serverAns.recString << "\n";
