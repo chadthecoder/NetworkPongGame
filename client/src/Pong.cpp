@@ -296,6 +296,8 @@ int Pong::UpdateGame()
     gameBall.x = this->screenWidth / 2;
     gameBall.y = this->screenHeight / 2;
     // gameBall.xVelocity *= -1;
+
+    return 2;
   }
   else if ((gameBall.x >= (this->screenWidth - this->thickness)) && (gameBall.xVelocity > 0.0f))
   {
@@ -303,6 +305,8 @@ int Pong::UpdateGame()
     gameBall.x = this->screenWidth / 2;
     gameBall.y = this->screenHeight / 2;
     // gameBall.xVelocity *= -1;
+
+    return 1;
   }
 
   // game over because one side has 7 points
@@ -369,7 +373,7 @@ int Pong::UpdateGame()
 
   this->UpdateScore();
 
-  return true;
+  return 0;
 }
 
 Paddle Pong::createPaddle(float xq, float yq, int widthq, int heightq, int directionq)

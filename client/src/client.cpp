@@ -60,17 +60,40 @@ int main(int argc, char *argv[])
         {
             ClientNet net(ip, "1025");
             SEND_REC_STRUCT serverAns;
+            int updateGame;
             
             while (game.getIsRunning())
             {
-                serverAns = net.SendAndRecMessage("hi");
-                std:: cout << "sendAns: " << serverAns.sendAns << "\n"
-                    << "recAns: " << serverAns.recAns << "\n"
-                    << "recString: " << serverAns.recString << "\n";
+                //serverAns = net.SendAndRecMessage("hi friend you are cool test yee");
+                //std:: cout << "sendAns: " << serverAns.sendAns << "\n"
+                //    << "recAns: " << serverAns.recAns << "\n"
+                //    << "recString: " << serverAns.recString << "\n";
 
                 game.ProcessInput();
                 std::cout << "ProcessInput done\n";
-                if(!game.UpdateGame()) break;
+                //if(!game.UpdateGame()) break;(
+                updateGame = game.UpdateGame();
+                if(updateGame == 0)
+                {
+                    //serverAns = net.SendAndRecMessage("no point?");
+                    //std:: cout << "sendAns: " << serverAns.sendAns << "\n"
+                    //    << "recAns: " << serverAns.recAns << "\n"
+                    //    << "recString: " << serverAns.recString << "\n";
+                }
+                else if(updateGame == 1)
+                {
+                    serverAns = net.SendAndRecMessage("left point!");
+                    std:: cout << "sendAns: " << serverAns.sendAns << "\n"
+                        << "recAns: " << serverAns.recAns << "\n"
+                        << "recString: " << serverAns.recString << "\n";
+                }
+                else if(updateGame == 2)
+                {
+                    serverAns = net.SendAndRecMessage("right point!");
+                    std:: cout << "sendAns: " << serverAns.sendAns << "\n"
+                        << "recAns: " << serverAns.recAns << "\n"
+                        << "recString: " << serverAns.recString << "\n";
+                }
                 if (game.CheckWin() == 1)
                 {
                     std::cout << "not updategame\n" << game.getIsRunning() << "\n";
