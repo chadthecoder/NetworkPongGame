@@ -33,9 +33,9 @@
 
 struct Vector2
 {
-  float x, y;
+  int x, y;
   Vector2() {}
-  Vector2(float x, float y)
+  Vector2(int x, int y)
   {
     this->x = x;
     this->y = y;
@@ -44,16 +44,16 @@ struct Vector2
 
 struct Paddle
 {
-  float x, y;
+  int x, y;
   int width, height, direction;
 };
 
 struct Ball
 {
-  float x, y, xVelocity, yVelocity;
+  int x, y, xVelocity, yVelocity;
   int width, height;
 
-  Ball(float x, float y, float xVel, float yVel, int width, int height)
+  Ball(int x, int y, int xVel, int yVel, int width, int height)
   {
     this->x = x;
     this->y = y;
@@ -84,7 +84,7 @@ struct Ball
     // fix to work so mattter what side of the paddle it hits?
 
     // Did we intersect with the paddle?
-    float diff = paddle.y - this->y;
+    int diff = paddle.y - this->y;
     // Take absolute value of difference
     diff = (diff > 0.0f) ? diff : -diff;
     if (
@@ -181,7 +181,7 @@ private:
 
   void centerVector2(Vector2 vec);
 
-  Paddle createPaddle(float x, float y, int width, int height, int direction);
+  Paddle createPaddle(int x, int y, int width, int height, int direction);
   void drawPaddle(Paddle mPaddle);
 
   SDL_Rect createPaddleU();

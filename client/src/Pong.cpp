@@ -84,7 +84,7 @@ bool Pong::Initialize()
   }
 
   SDL_GetCurrentDisplayMode(0, &this->DM);
-  this->screenHeight = this->DM.h;
+  this->screenHeight = this->DM.h - 90; //-80 to not be under bottom bar
   this->screenWidth = this->DM.w;
   this->thickness = this->screenWidth / 100;
   this->paddleHeight = this->thickness * 6;
@@ -97,9 +97,9 @@ bool Pong::Initialize()
   this->mWindow = SDL_CreateWindow(
       "Pong Game",
       SDL_WINDOWPOS_CENTERED,
-      SDL_WINDOWPOS_CENTERED,
-      800, //this->screenWidth,
-      800, //this->screenHeight,
+      0, // start from top
+      this->screenWidth,
+      this->screenHeight,
       0); //SDL_WINDOW_FULLSCREEN);
 
   /*this->mWindow = SDL_CreateWindow(
@@ -376,7 +376,7 @@ int Pong::UpdateGame()
   return 0;
 }
 
-Paddle Pong::createPaddle(float xq, float yq, int widthq, int heightq, int directionq)
+Paddle Pong::createPaddle(int xq, int yq, int widthq, int heightq, int directionq)
 {
   Paddle mPaddle;
   mPaddle.x = xq;
