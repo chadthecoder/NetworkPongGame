@@ -167,8 +167,8 @@ bool Pong::Initialize()
   rectLeftSrc.y = 50;
 
   rectScoreLine = {
-      static_cast<int>(100),
-      static_cast<int>(65),
+      100,
+      65,
       20,
       5};
 
@@ -390,8 +390,8 @@ Paddle Pong::createPaddle(int xq, int yq, int widthq, int heightq, int direction
 void Pong::drawPaddle(Paddle mPaddle)
 {
   SDL_Rect rectMPaddle{
-      static_cast<int>(mPaddle.x - (mPaddle.width / 2.0f)),
-      static_cast<int>(mPaddle.y - (mPaddle.height / 2.0f)),
+      (mPaddle.x - (mPaddle.width / 2)),
+      (mPaddle.y - (mPaddle.height / 2)),
       mPaddle.width,
       mPaddle.height};
   SDL_RenderFillRect(this->mRenderer, &rectMPaddle);
@@ -400,8 +400,8 @@ void Pong::drawPaddle(Paddle mPaddle)
 SDL_Rect Pong::createPaddleU()
 {
   SDL_Rect myPaddle{
-      static_cast<int>(paddleU.x - (paddleU.width / 2.0f)),
-      static_cast<int>(paddleU.y - (paddleU.height / 2.0f)),
+      (paddleU.x - (paddleU.width / 2)),
+      (paddleU.y - (paddleU.height / 2)),
       this->paddleU.width,
       this->paddleU.height};
   return myPaddle;
@@ -462,8 +462,8 @@ void Pong::Render()
 
   // create sdl rect for ball
   SDL_Rect ball{
-      static_cast<int>(gameBall.x - (gameBall.width / 2.0f)),
-      static_cast<int>(gameBall.y - (gameBall.height / 2.0f)),
+      (gameBall.x - (gameBall.width / 2)),
+      (gameBall.y - (gameBall.height / 2)),
       gameBall.width,
       gameBall.height};
   // fill sdl rect info into render
