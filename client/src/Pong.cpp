@@ -337,26 +337,26 @@ int Pong::UpdateGame()
 
   if (this->paddleU.direction != 0)
   {
-    if (this->paddleU.y < this->thickness)
+    if (this->paddleU.y < ((this->paddleU.height/2) + (this->thickness*2-this->thickness/2)))
     {
-      this->paddleU.y = this->thickness;
+      this->paddleU.y = ((this->paddleU.height/2) + (this->thickness*2-this->thickness/2));
     }
-    else if (this->paddleU.y > (this->screenHeight - this->thickness - this->paddleU.height))
+    else if (this->paddleU.y > (this->screenHeight - this->paddleU.height + this->thickness))
     {
-      this->paddleU.y = this->screenHeight - this->thickness - this->paddleU.height;
+      this->paddleU.y = this->screenHeight - this->paddleU.height + this->thickness;
     }
     this->paddleU.y += this->paddleU.direction * 300.0f * this->deltaTime;
   }
 
   if (this->funny.direction != 0)
   {
-    if (this->funny.y < this->thickness)
+    if (this->funny.y < ((this->funny.height/2) + (this->thickness*2-this->thickness/2)))
     {
-      this->funny.y = this->thickness;
+      this->funny.y = ((this->funny.height/2) + (this->thickness*2-this->thickness/2)); 
     }
-    else if (this->funny.y > (this->screenHeight - this->thickness - this->funny.height))
+    else if ((this->funny.y > (this->screenHeight - this->funny.height + this->thickness)))
     {
-      this->funny.y = this->screenHeight - this->thickness - this->funny.height;
+      this->funny.y = (this->screenHeight - this->funny.height + this->thickness);
     }
     this->funny.y += this->funny.direction * 300.0f * this->deltaTime;
   }
