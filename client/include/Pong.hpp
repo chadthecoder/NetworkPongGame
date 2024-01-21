@@ -168,7 +168,11 @@ public:
   //void RunLoop();
   void Shutdown();
   void ProcessInput();
-  int UpdateGame(); //1==continue, 2==left wins, 3==right wins
+
+  //1st variable: 0==end-game, 1==continue-game
+  //2nd variable: 0==no-wins, 1==left-wins, 2==right-wins
+  std::string UpdateGame();
+
   void Render();
 
   int CheckWin();
@@ -197,6 +201,8 @@ private:
   int screenHeight, screenWidth, thickness, paddleWidth, paddleHeight;
   int testyFunny = 400, leftPoints = 0, rightPoints = 0;
   SDL_Rect rectScoreLine;
+
+  std::string networkMessage;
 };
 
 #endif

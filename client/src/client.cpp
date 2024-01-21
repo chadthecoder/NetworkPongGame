@@ -50,17 +50,17 @@ int main(int argc, char *argv[])
 
         std::string ip = argv[1];
         
-        std::cout << "arg: " << argv[1] << "\nip: " << ip << std::endl;
+        //std::cout << "arg: " << argv[1] << "\nip: " << ip << std::endl;
 
         Pong game(ip, "1025");
-        std::cout << "Game init done\n";
+        //std::cout << "Game init done\n";
         bool success = game.Initialize();
         std::cout << std::to_string(success) << std::endl;
         if (success)
         {
             ClientNet net(ip, "1025");
             SEND_REC_STRUCT serverAns;
-            int updateGame;
+            std::string updateGame;
             
             while (game.getIsRunning())
             {
@@ -73,61 +73,13 @@ int main(int argc, char *argv[])
                 std::cout << "ProcessInput done\n";
                 //if(!game.UpdateGame()) break;(
                 updateGame = game.UpdateGame();
-                if(updateGame == 0)
-                {
-                    //serverAns = net.SendAndRecMessage("no point?");
-                    //std:: cout << "sendAns: " << serverAns.sendAns << "\n"
-                    //    << "recAns: " << serverAns.recAns << "\n"
-                    //    << "recString: " << serverAns.recString << "\n";
-                }
-                else if(updateGame == 1)
-                {
-                    serverAns = net.SendAndRecMessage("left point!");
-                    std:: cout << "sendAns: " << serverAns.sendAns << "\n"
-                        << "recAns: " << serverAns.recAns << "\n"
-                        << "recString: " << serverAns.recString << "\n";
-                }
-                else if(updateGame == 2)
-                {
-                    serverAns = net.SendAndRecMessage("right point!");
-                    std:: cout << "sendAns: " << serverAns.sendAns << "\n"
-                        << "recAns: " << serverAns.recAns << "\n"
-                        << "recString: " << serverAns.recString << "\n";
-                }
-                if (game.CheckWin() == 1)
-                {
-                    std::cout << "not updategame\n" << game.getIsRunning() << "\n";
-                    //break;
-                }
-                else if(game.CheckWin() == 2)
-                {
-                    std::cout << "Left side wins!\n";
-                    serverAns = net.SendAndRecMessage("Left side wins!!");
-                    std:: cout << "sendAns: " << serverAns.sendAns << "\n"
-                        << "recAns: " << serverAns.recAns << "\n"
-                        << "recString: " << serverAns.recString << "\n";
-                    break;
-                }
-                else if(game.CheckWin() == 3)
-                {
-                    std::cout << "Right side wins!\n";
-                    serverAns = net.SendAndRecMessage("Right side wins!");
-                    std:: cout << "sendAns: " << serverAns.sendAns << "\n"
-                        << "recAns: " << serverAns.recAns << "\n"
-                        << "recString: " << serverAns.recString << "\n";
-                    break;
-                }
-                else 
-                {
-                    //serverAns = net.SendAndRecMessage(game.UpdateGame());
-                    //std:: cout << "sendAns: " << serverAns.sendAns << "\n"
-                    //    << "recAns: " << serverAns.recAns << "\n"
-                    //    << "recString: " << serverAns.recString << "\n";
-                    std::cout << "What happened?\n";
-                    break;
-                }
+                
+                net.SendAndRecMessage(updateGame);
+                
+                std::cout << "update game: " << updateGame << "\n";
+
                 game.Render();
-                std::cout << "render done\n";
+                //std::cout << "render done\n";
             }
             
         }

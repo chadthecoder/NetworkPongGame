@@ -5,7 +5,7 @@
 SDL_Texture *textLeftScore, *textRightScore;
 SDL_Rect rectLeftSrc, rectRightSrc, rectDest;
 
-Pong::Pong(std::string ip, std::string port) : mIsRunning(true), mTicksCount(0), gameBall(1500.0f, 500.0f, -100.0f, 117.5f, 15, 15), leftPoints(0), rightPoints(0)
+Pong::Pong(std::string ip, std::string port) : networkMessage(""), mIsRunning(true), mTicksCount(0), gameBall(1500.0f, 500.0f, -100.0f, 117.5f, 15, 15), leftPoints(0), rightPoints(0)
 {
   // print the ref of io_context to show that it worked for now
   // this->io_context = io_context;
@@ -17,7 +17,7 @@ int Pong::CheckWin()
   // game over because one side has 7 points
   if (this->leftPoints == 7)
   {
-    std::cout << "The left side wins!\n";
+    //std::cout << "The left side wins!\n";
     /*
       Doesn't do anything right now since returning false stops loop, but could be used in the future.
       this->mIsRunning = false;
@@ -27,7 +27,7 @@ int Pong::CheckWin()
 
   if (this->rightPoints == 7)
   {
-    std::cout << "The right side wins!\n";
+    //std::cout << "The right side wins!\n";
     /*
       Doesn't do anything right now since returning false stops loop, but could be used in the future.
       this->mIsRunning = false;
@@ -192,15 +192,15 @@ void Pong::UpdateScore()
 
 void Pong::ProcessInput()
 {
-  std::cout << "in process input\n";
+  //std::cout << "in process input\n";
 
   while (SDL_PollEvent(&this->event))
   {
-    std::cout << "in while loop\n";
+    //std::cout << "in while loop\n";
     switch (this->event.type)
     {
       case SDL_QUIT:
-        std::cout << "sdl_quit\n";
+        //std::cout << "sdl_quit\n";
         mIsRunning = false;
         break;
     }
@@ -238,8 +238,12 @@ void Pong::ProcessInput()
   }
 }
 
-int Pong::UpdateGame()
+
+//1st variable: 0==continue-game, 1==left-wins, 2==right-wins
+//2nd variable: 0==no-points, 1==left-point, 2==right-point
+std::string Pong::UpdateGame()
 {
+  char var1='0', var2='0';
   while (!SDL_TICKS_PASSED(SDL_GetTicks(), this->mTicksCount + 16))
     ;
 
@@ -266,7 +270,7 @@ int Pong::UpdateGame()
     gameBall.y = this->screenHeight / 2;
     // gameBall.xVelocity *= -1;
 
-    return 2;
+    var2 = '2';
   }
   else if ((gameBall.x >= (this->screenWidth - this->thickness)) && (gameBall.xVelocity > 0.0f))
   {
@@ -275,7 +279,7 @@ int Pong::UpdateGame()
     gameBall.y = this->screenHeight / 2;
     // gameBall.xVelocity *= -1;
 
-    return 1;
+    var2 = '1';
   }
 
   // game over because one side has 7 points
@@ -342,8 +346,51 @@ int Pong::UpdateGame()
 
   this->UpdateScore();
 
-  return 0;
-}
+  if (CheckWin() == 1)
+                {
+                    //std::cout << "not updategame\n" << getIsRunning() << "\n";
+                    //break;
+                    var1 = '0';
+                }
+                else if(CheckWin() == 2)
+                {
+                    //std::cout << "Left side wins!\n";
+                    //serverAns = net.SendAndRecMessage("Left side wins!!");
+                    //std:: cout << "sendAns: " << serverAns.sendAns << "\n"
+                    //    << "recAns: " << serverAns.recAns << "\n"
+                    //    << "recString: " << serverAns.recString << "\n";
+                    //break;
+                    var1 = '1';
+                }
+                else if(CheckWin() == 3)
+                {
+                    //std::cout << "Right side wins!\n";
+                    //serverAns = net.SendAndRecMessage("Right side wins!");
+                    //std:: cout << "sendAns: " << serverAns.sendAns << "\n"
+                    //    << "recAns: " << serverAns.recAns << "\n"
+                    //    << "recString: " << serverAns.recString << "\n";
+                    //break;
+                    var1 = '2';
+                }
+                else 
+                {
+                    //serverAns = net.SendAndRecMessage(game.UpdateGame());
+                    //std:: cout << "sendAns: " << serverAns.sendAns << "\n"
+                    //    << "recAns: " << serverAns.recAns << "\n"
+                    //    << "recString: " << serverAns.recString << "\n";
+                    std::cout << "What happened?\n";
+                    //break;
+                    var1 = '3';
+                }
+                Render();
+                //std::cout << "render done\n";
+
+                networkMessage.clear();
+                networkMessage.push_back(var1);
+                networkMessage.push_back(var2);
+
+                return networkMessage;
+            }
 
 Paddle Pong::createPaddle(int xq, int yq, int widthq, int heightq, int directionq)
 {
