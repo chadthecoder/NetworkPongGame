@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
         Pong game(ip, "1025");
         //std::cout << "Game init done\n";
         bool success = game.Initialize();
-        std::cout << std::to_string(success) << std::endl;
+        //std::cout << std::to_string(success) << std::endl;
         if (success)
         {
             ClientNet net(ip, "1025");

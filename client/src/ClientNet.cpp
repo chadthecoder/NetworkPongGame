@@ -26,7 +26,7 @@ int ClientNet::SendMessage(std::string mess)
           new std::string(mess));
 
     asio::ip::udp::resolver resolver(this->io_context);
-    std::cout << "send mess ip: " << this->ip << " and port: " << this->port << "\n";
+    //std::cout << "send mess ip: " << this->ip << " and port: " << this->port << "\n";
     this->receiver_endpoint =
       *resolver.resolve(asio::ip::udp::v4(), this->ip, this->port).begin();
 
@@ -36,7 +36,7 @@ int ClientNet::SendMessage(std::string mess)
     // boost::array<char, 1> send_buf = {{0}};
     this->socket_.send_to(asio::buffer(*messPtr), this->receiver_endpoint);
     //this->socket_.send_to(asio::buffer(this->send_buf), this->receiver_endpoint);
-    std::cout << "128 buff sennt to server" << std::endl;
+    //std::cout << "128 buff sennt to server" << std::endl;
 
     return 0; 
 }
@@ -45,23 +45,23 @@ REC_STRUCT ClientNet::RecMessage()
 {
     REC_STRUCT ans;
 
-    std::cout << "In startreceive\n"
-            << std::endl;
+    //std::cout << "In startreceive\n"
+    //        << std::endl;
     this->len = socket_.receive_from(asio::buffer(this->recv_buf), this->sender_endpoint);
     /*socket_.async_receive_from(
             asio::buffer(this->recv_buf), this->sender_endpoint,
             std::bind(handle_receive));*/
 
-    std::cout << "lh[dshlfihdsilfhl;ds\n"
-            << len << "\n"
-            << std::endl;
+    //std::cout << "lh[dshlfihdsilfhl;ds\n"
+    //        << len << "\n"
+    //        << std::endl;
 
-    std::cout.write(recv_buf.data(), len);
+    //std::cout.write(recv_buf.data(), len);
 
     ans.recAns = 0;
     ans.recString = recv_buf.data();
 
-    std::cout << "start receive test: end of rec\n";
+    //std::cout << "start receive test: end of rec\n";
 
     return ans;
 }
