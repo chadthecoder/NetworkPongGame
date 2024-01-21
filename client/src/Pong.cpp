@@ -22,6 +22,7 @@ int Pong::CheckWin()
       Doesn't do anything right now since returning false stops loop, but could be used in the future.
       this->mIsRunning = false;
     */
+   this->mIsRunning = false;
     return 2;
   }
 
@@ -32,6 +33,7 @@ int Pong::CheckWin()
       Doesn't do anything right now since returning false stops loop, but could be used in the future.
       this->mIsRunning = false;
     */
+   this->mIsRunning = false;
     return 3;
   }
 
