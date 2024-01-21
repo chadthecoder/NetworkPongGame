@@ -176,8 +176,6 @@ public:
 
 private:
   void UpdateScore();
-  void StartSend();
-  void StartReceive();
 
   void centerVector2(Vector2 vec);
 
@@ -199,16 +197,6 @@ private:
   int screenHeight, screenWidth, thickness, paddleWidth, paddleHeight;
   int testyFunny = 400, leftPoints = 0, rightPoints = 0;
   SDL_Rect rectScoreLine;
-
-  asio::io_context io_context;
-  std::string ip;
-  asio::ip::udp::socket socket_;
-  std::array<char, 128> send_buf;
-  asio::ip::udp::endpoint receiver_endpoint;
-  std::array<char, 128> recv_buf;
-  asio::ip::udp::endpoint sender_endpoint;
-  size_t len;
-  std::string port;
 };
 
 #endif

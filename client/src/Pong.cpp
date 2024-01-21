@@ -5,42 +5,11 @@
 SDL_Texture *textLeftScore, *textRightScore;
 SDL_Rect rectLeftSrc, rectRightSrc, rectDest;
 
-Pong::Pong(std::string ip, std::string port) : socket_(this->io_context), port(port), send_buf({{0}}), mIsRunning(true), mTicksCount(0), gameBall(1500.0f, 500.0f, -100.0f, 117.5f, 15, 15), leftPoints(0), rightPoints(0)
+Pong::Pong(std::string ip, std::string port) : mIsRunning(true), mTicksCount(0), gameBall(1500.0f, 500.0f, -100.0f, 117.5f, 15, 15), leftPoints(0), rightPoints(0)
 {
   // print the ref of io_context to show that it worked for now
   // this->io_context = io_context;
-  this->ip = ip;
-  std::cout << "in pong construct: io-> " << &this->io_context << " " << ip << std::endl;
   //this->StartSend();
-}
-
-void Pong::StartSend()
-{
-  asio::ip::udp::resolver resolver(this->io_context);
-  std::cout << this->ip << std::endl;
-  this->receiver_endpoint =
-      *resolver.resolve(asio::ip::udp::v4(), this->ip, this->port).begin();
-
-  // udp::socket socketOne(io_context);
-  this->socket_.open(asio::ip::udp::v4());
-
-  // boost::array<char, 1> send_buf = {{0}};
-  this->socket_.send_to(asio::buffer(this->send_buf), this->receiver_endpoint);
-  std::cout << "128 buff sent to server" << std::endl;
-  StartReceive();
-}
-
-void Pong::StartReceive()
-{
-  std::cout << "In startreceive\n"
-            << std::endl;
-  this->len = socket_.receive_from(
-            asio::buffer(this->recv_buf), this->sender_endpoint);
-  std::cout << "lh[dshlfihdsilfhl;ds\n"
-            << len << "\n"
-            << std::endl;
-
-  std::cout.write(recv_buf.data(), len);
 }
 
 int Pong::CheckWin()
