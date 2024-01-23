@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
         //std::cout << std::to_string(success) << std::endl;
         if (success)
         {
-            ClientNet net(ip, "1025");
+            //ClientNet net(ip, "1025");
             SEND_REC_STRUCT serverAns;
             std::string updateGame;
             
@@ -74,7 +74,8 @@ int main(int argc, char *argv[])
                 //if(!game.UpdateGame()) break;(
                 updateGame = game.UpdateGame();
                 
-                net.SendAndRecMessage(updateGame);
+                //do this in update
+                //net.SendAndRecMessage(updateGame);
                 
                 std::cout << "update game: " << updateGame << "\n";
 

@@ -1,7 +1,9 @@
 #include <UAS.hpp>
 
 UAS::UAS(asio::io_context& io_context, asio::ip::port_type port_num)
-    : socket_(io_context, asio::ip::udp::endpoint(asio::ip::udp::v4(), 1025))
+    : socket_(io_context, asio::ip::udp::endpoint(asio::ip::udp::v4(), 1025)),
+      recTime(std::time(nullptr)), lastRecTime(std::time(nullptr)), timeDiff(std::time(nullptr)),
+      tRec(clock()), tLastRec(clock()), tDiff(clock())
 {
   start_receive();
 }
@@ -19,6 +21,18 @@ void UAS::start_receive()
 void UAS::handle_receive(const asio::error_code& error,
   std::size_t /*bytes_transferred*/)
 {
+    lastRecTime = recTime;
+    recTime = std::time(nullptr);
+    timeDiff = recTime-lastRecTime;
+
+    tLastRec = tRec;
+    tRec = clock();
+    tDiff = tRec-tLastRec;
+    timeDiffAnsDouble = difftime(tRec, tLastRec);
+
+    std::string timeDiffStr = std::ctime(&timeDiff);
+    std::cout << "Time Diff String: " << timeDiffAnsDouble << "\n";
+
     if (!error)
     {
       std::cout << "rec from client: " << recv_buffer_ .data() << "\n";

@@ -20,6 +20,8 @@
 #include <iostream>
 #include <cmath>
 
+#include <ClientNet.hpp>
+
 /* #define ASIO_STANDALONE
 #define ASIO_HAS_STD_ADDRESSOF
 #define ASIO_HAS_STD_ARRAY
@@ -202,6 +204,7 @@ private:
   int testyFunny = 400, leftPoints = 0, rightPoints = 0;
   SDL_Rect rectScoreLine;
 
+  ClientNet net;
   std::string networkMessage;
 };
 

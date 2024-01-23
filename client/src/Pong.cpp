@@ -1,11 +1,12 @@
 #include <Pong.hpp>
+
 #include <iostream>
 // using namespace std;
 
 SDL_Texture *textLeftScore, *textRightScore;
 SDL_Rect rectLeftSrc, rectRightSrc, rectDest;
 
-Pong::Pong(std::string ip, std::string port) : networkMessage(""), mIsRunning(true), mTicksCount(0), gameBall(1500.0f, 500.0f, -100.0f, 117.5f, 15, 15), leftPoints(0), rightPoints(0)
+Pong::Pong(std::string ip, std::string port) : net(ip, "1025"), networkMessage(""), mIsRunning(true), mTicksCount(0), gameBall(1500.0f, 500.0f, -100.0f, 117.5f, 15, 15), leftPoints(0), rightPoints(0)
 {
   // print the ref of io_context to show that it worked for now
   // this->io_context = io_context;
@@ -246,6 +247,8 @@ void Pong::ProcessInput()
 std::string Pong::UpdateGame()
 {
   char var1='0', var2='0';
+  //std::string paddlesLocation="0";
+
   while (!SDL_TICKS_PASSED(SDL_GetTicks(), this->mTicksCount + 16))
     ;
 
@@ -387,9 +390,20 @@ std::string Pong::UpdateGame()
                 Render();
                 //std::cout << "render done\n";
 
+                //paddlesLocation = char(paddleU.x) + char(paddleU.y) + char(funny.x) + char(funny.y);
+
                 networkMessage.clear();
                 networkMessage.push_back(var1);
                 networkMessage.push_back(var2);
+
+              std::cout << "paddle loc 1: " << paddleU.x;
+
+                networkMessage.push_back(paddleU.x);
+                networkMessage.push_back(paddleU.y);
+                networkMessage.push_back(funny.x);
+                networkMessage.push_back(funny.y);
+
+                net.SendAndRecMessage(networkMessage);
 
                 return networkMessage;
             }

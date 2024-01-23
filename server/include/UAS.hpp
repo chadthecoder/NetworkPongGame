@@ -25,4 +25,9 @@ private:
   asio::ip::udp::socket socket_;
   asio::ip::udp::endpoint remote_endpoint_;
   std::array<char, 128> recv_buffer_;
+
+  std::time_t recTime, lastRecTime, timeDiff;
+  clock_t tRec, tLastRec, tDiff;
+
+  double timeDiffAnsDouble;
 };
