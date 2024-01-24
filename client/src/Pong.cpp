@@ -398,10 +398,39 @@ std::string Pong::UpdateGame()
 
               std::cout << "paddle loc 1: " << paddleU.x;
 
-                networkMessage.push_back(paddleU.x);
-                networkMessage.push_back(paddleU.y);
-                networkMessage.push_back(funny.x);
-                networkMessage.push_back(funny.y);
+                char buff1[4], buff2[4], buff3[4], buff4[4];
+
+                //itoa();
+
+                //itoa(paddleU.x, buff1, 10);
+
+                std::string str1 = std::to_string(paddleU.x);
+                //std::string ans1;
+
+                int str1length = str1.length();
+
+                if(str1length>=4) std::cout << "Either you messed up or it is fine!\n";
+                else
+                {
+                  std::cout << "Loop start: " << str1length << "\n";
+                  for(int i = 0; i<4-str1length; i++)
+                  {
+                    networkMessage.push_back('0');
+                    //std::cout << "Pushing back 0\n";
+                  }
+                  for(int i=0; i<str1length; i++)
+                  {
+                    std::cout << "Pushing back " << str1[i] << "\n";
+                    networkMessage.push_back(str1[i]);
+                  }
+                }
+
+                std::cout << "Loop done\n";
+
+                //networkMessage.push_back(ans1);
+                //networkMessage.push_back(itoa(paddleU.y, 10));
+                //networkMessage.push_back(itoa(funny.x, 10));
+                //networkMessage.push_back(itoa(funny.y, 10));
 
                 net.SendAndRecMessage(networkMessage);
 
