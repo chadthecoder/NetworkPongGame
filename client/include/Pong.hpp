@@ -182,6 +182,7 @@ public:
   bool getIsRunning();
 
 private:
+  void push4char(std::string& pushString, int pushInt);
   void UpdateScore();
 
   void centerVector2(Vector2 vec);

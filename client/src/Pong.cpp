@@ -13,6 +13,37 @@ Pong::Pong(std::string ip, std::string port) : net(ip, "1025"), networkMessage("
   //this->StartSend();
 }
 
+void Pong::push4char(std::string& pushString, int pushInt)
+{
+  std::string str1 = std::to_string(pushInt);
+  //std::string ans1;
+
+  int str1length = str1.length();
+
+  if(str1length>4) std::cout << "You messed up!\n";
+  else if(str1length==4)
+  {
+    for(int i=0; i<str1length; i++)
+    {
+      pushString.push_back(str1[i]);
+    }
+  }
+  else if(str1length<4)
+  {
+    //std::cout << "Loop start: " << str1length << "\n";
+    for(int i = 0; i<4-str1length; i++)
+    {
+      pushString.push_back('0');
+      //std::cout << "Pushing back 0\n";
+    }
+    for(int i=0; i<str1length; i++)
+    {
+      std::cout << "Pushing back " << str1[i] << "\n";
+      pushString.push_back(str1[i]);
+    }
+  }
+}
+
 int Pong::CheckWin()
 {
   // game over because one side has 7 points
@@ -396,41 +427,34 @@ std::string Pong::UpdateGame()
                 networkMessage.push_back(var1);
                 networkMessage.push_back(var2);
 
-              std::cout << "paddle loc 1: " << paddleU.x;
+              //std::cout << "paddle loc 1: " << paddleU.x;
 
-                char buff1[4], buff2[4], buff3[4], buff4[4];
+                //char buff1[4], buff2[4], buff3[4], buff4[4];
 
                 //itoa();
 
                 //itoa(paddleU.x, buff1, 10);
 
-                std::string str1 = std::to_string(paddleU.x);
-                //std::string ans1;
+                
 
-                int str1length = str1.length();
-
-                if(str1length>=4) std::cout << "Either you messed up or it is fine!\n";
-                else
-                {
-                  std::cout << "Loop start: " << str1length << "\n";
-                  for(int i = 0; i<4-str1length; i++)
-                  {
-                    networkMessage.push_back('0');
-                    //std::cout << "Pushing back 0\n";
-                  }
-                  for(int i=0; i<str1length; i++)
-                  {
-                    std::cout << "Pushing back " << str1[i] << "\n";
-                    networkMessage.push_back(str1[i]);
-                  }
-                }
-
-                std::cout << "Loop done\n";
+                //std::cout << "Loop done\n";
 
                 //networkMessage.push_back(ans1);
                 //networkMessage.push_back(itoa(paddleU.y, 10));
                 //networkMessage.push_back(itoa(funny.x, 10));
                 //networkMessage.push_back(itoa(funny.y, 10));
+
+                std::cout << "paddle locs is: "
+                          << paddleU.x << " : "
+                          << paddleU.y << " : "
+                          << funny.x << " : "
+                          << funny.y << " : "
+                          << "\n";
+
+                push4char(networkMessage, paddleU.x);
+                push4char(networkMessage, paddleU.y);
+                push4char(networkMessage, funny.x);
+                push4char(networkMessage, funny.y);
 
                 net.SendAndRecMessage(networkMessage);
 
