@@ -179,6 +179,8 @@ public:
   //7th-10th variable: left paddle y
   //11th-14th variable: right paddle x
   //15th-18th variable: right paddle y
+  //19th variable: left score
+  //20th variable: right score
   std::string UpdateGame();
 
   void Render();
