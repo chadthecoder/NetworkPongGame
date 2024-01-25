@@ -172,8 +172,12 @@ public:
   void Shutdown();
   void ProcessInput();
 
-  //1st variable: 0==end-game, 1==continue-game
-  //2nd variable: 0==no-wins, 1==left-wins, 2==right-wins
+  //1st variable: 0==continue-game, 1==left-wins, 2==right-wins
+  //2nd variable: 0==no-points, 1==left-point, 2==right-point
+  //3rd-6th variable: left paddle x
+  //7th-10th variable: left paddle y
+  //11th-14th variable: right paddle x
+  //15th-18th variable: right paddle y
   std::string UpdateGame();
 
   void Render();
@@ -183,6 +187,8 @@ public:
 
 private:
   void push4char(std::string& pushString, int pushInt);
+  bool checkHorizWallColl(Ball ball);
+
   void UpdateScore();
 
   void centerVector2(Vector2 vec);

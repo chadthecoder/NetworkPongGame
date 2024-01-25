@@ -44,6 +44,19 @@ void Pong::push4char(std::string& pushString, int pushInt)
   }
 }
 
+bool Pong::checkHorizWallColl(Ball ball)
+{
+  if ((ball.y >= (this->screenHeight - this->thickness)) && (ball.yVelocity > 0.0f))
+  {
+    return true;
+  }
+  else if ((ball.y <= this->thickness) && (ball.yVelocity < 0.0f))
+  {
+    return true;
+  }
+  else return false;
+}
+
 int Pong::CheckWin()
 {
   // game over because one side has 7 points
@@ -295,14 +308,15 @@ std::string Pong::UpdateGame()
   }
 
   // if paddle collides with side of screen, collision detection
-  if ((gameBall.y >= (this->screenHeight - this->thickness)) && (gameBall.yVelocity > 0.0f))
+  /*if ((gameBall.y >= (this->screenHeight - this->thickness)) && (gameBall.yVelocity > 0.0f))
   {
     gameBall.yVelocity *= -1;
   }
   else if ((gameBall.y <= this->thickness) && (gameBall.yVelocity < 0.0f))
   {
     gameBall.yVelocity *= -1;
-  }
+  }*/
+  if(checkHorizWallColl(gameBall)) gameBall.yVelocity *= -1;
   else if ((gameBall.x <= this->thickness) && (gameBall.xVelocity < 0.0f))
   {
     this->rightPoints += 1;
