@@ -438,7 +438,7 @@ std::string Pong::UpdateGame()
                     //break;
                     var1 = '3';
                 }
-                Render();
+                //Render();
                 //std::cout << "render done\n";
 
                 //paddlesLocation = char(paddleU.x) + char(paddleU.y) + char(funny.x) + char(funny.y);
