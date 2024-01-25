@@ -390,12 +390,14 @@ std::string Pong::UpdateGame()
 
   if (gameBall.collidesWith(paddleU))
   {
-    // gameBall.xVelocity *= -1;
+    //this->xVelocity *= -1.0f;
+    gameBall.xVelocity *= -1;
   }
 
   if (gameBall.collidesWith(funny))
   {
-    // gameBall.xVelocity *= -1;
+    //this->xVelocity *= -1.0f;
+    gameBall.xVelocity *= -1;
   }
 
   this->UpdateScore();

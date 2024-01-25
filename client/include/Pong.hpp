@@ -99,7 +99,7 @@ struct Ball
         // The ball is moving to the left
         this->xVelocity < 0.0f)
     {
-      this->xVelocity *= -1.0f;
+      return true; //this->xVelocity *= -1.0f;
     }
     else if (
         // Our y-difference is small enough
@@ -111,8 +111,9 @@ struct Ball
         // The ball is moving to the right
         this->xVelocity > 0.0f)
     {
-      this->xVelocity *= -1.0f;
+      return true; //this->xVelocity *= -1.0f;
     }
+    else return false;
 
     // old collision detection way, find new way that works no matter what direction the ball hits the paddle?
     /*bool test1 = false, test2 = false, test3 = false, test4 = false;
@@ -159,7 +160,7 @@ struct Ball
     }
     */
     // temp placeholder to run
-    return false;
+    //return false;
   }
 };
 
