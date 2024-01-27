@@ -5,6 +5,7 @@
 #include <asio.hpp>
 
 #include <iostream>
+#include <set>
 
 #include <utils.hpp>
 
@@ -30,4 +31,6 @@ private:
   clock_t tRec, tLastRec, tDiff;
 
   double timeDiffAnsDouble;
+
+  std::set<std::string> clients;
 };

@@ -45,9 +45,21 @@ void UAS::handle_receive(const asio::error_code& error,
             std::placeholders::_1,
             std::placeholders::_2));
 
-            std::cout << "creating session on: " 
-                    << remote_endpoint_.address().to_string() 
-                    << ":" << remote_endpoint_.port() << "\n";// << str << '\n';
+            //check if client is already connected
+            unsigned short port = remote_endpoint_.port();
+            clients.insert(remote_endpoint_.address().to_string()+std::to_string(port));
+
+            //std::cout << "creating session on: " 
+            //        << remote_endpoint_.address().to_string() 
+            //        << ":" << remote_endpoint_.port() << "\n";// << str << '\n';
+
+            std::cout << "Current clients are: "; 
+            std::set<std::string>::iterator itr;
+            for (itr = clients.begin(); itr != clients.end(); itr++)
+            {
+              std::cout << *itr << ", ";
+            }        
+            std::cout << "\n";
 
       start_receive();
   }
