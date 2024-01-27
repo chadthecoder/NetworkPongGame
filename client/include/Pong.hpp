@@ -181,6 +181,10 @@ public:
   //15th-18th variable: right paddle y
   //19th variable: left score
   //20th variable: right score
+  //21st-24th variable: game ball x
+  //25th-28th variable: game ball y
+  //29th-32nd variable: game ball x velocity
+  //33rd-36th variable: game ball y velocity
   std::string UpdateGame();
 
   void Render();

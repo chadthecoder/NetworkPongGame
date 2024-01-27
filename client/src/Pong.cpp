@@ -285,15 +285,6 @@ void Pong::ProcessInput()
   }
 }
 
-
-//1st variable: 0==continue-game, 1==left-wins, 2==right-wins
-//2nd variable: 0==no-points, 1==left-point, 2==right-point
-//3rd-6th variable: left paddle x
-//7th-10th variable: left paddle y
-//11th-14th variable: right paddle x
-//15th-18th variable: right paddle y
-//19th variable: left score
-//20th variable: right score
 std::string Pong::UpdateGame()
 {
   char var1='0', var2='0';
@@ -478,11 +469,22 @@ std::string Pong::UpdateGame()
                 push4char(networkMessage, funny.x);
                 push4char(networkMessage, funny.y);
 
+                //push4char(networkMessage, this->leftPoints);
+                //push4char(networkMessage, this->rightPoints);
+
                 std::string leftScoreStr = std::to_string(this->leftPoints);
                 networkMessage.push_back(leftScoreStr[0]);
 
                 std::string rightScoreStr = std::to_string(this->rightPoints);
-                networkMessage.push_back(rightScoreStr[0]);
+                networkMessage.push_back(rightScoreStr[0]);                
+
+                push4char(networkMessage, gameBall.x);
+                push4char(networkMessage, gameBall.y);
+                push4char(networkMessage, gameBall.xVelocity);
+                push4char(networkMessage, gameBall.yVelocity);
+
+                //something here?
+                //this->
 
                 net.SendAndRecMessage(networkMessage);
 
