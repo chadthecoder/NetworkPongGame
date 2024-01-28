@@ -486,7 +486,8 @@ std::string Pong::UpdateGame()
                 //something here?
                 //this->
 
-                net.SendAndRecMessage(networkMessage);
+                SEND_REC_STRUCT fun = net.SendAndRecMessage(networkMessage);
+                std::cout << "rec message: " << sizeof(fun.recString) << " 12345 " << fun.recString << "\n";
 
                 return networkMessage;
             }
