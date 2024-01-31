@@ -4,6 +4,7 @@
 #include <asio.hpp>
 
 #include <iostream>
+#include <stdexcept>
 
 struct SEND_REC_STRUCT
 {
@@ -26,7 +27,7 @@ inline void handle_receive()
 class ClientNet
 {
 public:
-    ClientNet(std::string ip, std::string port);
+    ClientNet(std::string ip, std::string rec_port);
     ~ClientNet();
 
     SEND_REC_STRUCT SendAndRecMessage(std::string mess);
@@ -42,7 +43,8 @@ private:
     std::array<char, 128> recv_buf;
     asio::ip::udp::endpoint sender_endpoint;
     size_t len;
+    asio::ip::udp::resolver resolver;
 
     std::string ip;
-    std::string port;
+    std::string rec_port;
 };
