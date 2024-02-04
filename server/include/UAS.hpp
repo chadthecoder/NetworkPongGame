@@ -9,6 +9,7 @@
 //#include <chrono>
 
 #include <utils.hpp>
+#include <Client.hpp>
 
 class UAS
 {
