@@ -43,6 +43,7 @@ int main()
       //server.start_receive();
       io_context.run();
     }
+    //will execute if server is already running, have logic to be able to start muultiple servers on one computer?
     catch (std::exception& e)
     {
       std::cout << "errorrrr brooo\n";

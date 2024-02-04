@@ -2,8 +2,6 @@
 
 UAS::UAS(asio::io_context& io_context, asio::ip::port_type port_num)
     : socket_(io_context, asio::ip::udp::endpoint(asio::ip::udp::v4(), 1025)),
-      recTime(std::time(nullptr)), lastRecTime(std::time(nullptr)), timeDiff(std::time(nullptr)),
-      tRec(clock()), tLastRec(clock()), tDiff(clock()),
       time_last(std::chrono::steady_clock::now()), time_now(std::chrono::steady_clock::now())
 {
   start_receive();
@@ -22,25 +20,10 @@ void UAS::start_receive()
 void UAS::handle_receive(const asio::error_code& error,
   std::size_t /*bytes_transferred*/)
 {
-    lastRecTime = recTime;
-    recTime = std::time(nullptr);
-    timeDiff = recTime-lastRecTime;
-
-    tLastRec = tRec;
-    tRec = clock();
-    tDiff = tRec-tLastRec;
-    timeDiffAnsDouble = difftime(tRec, tLastRec);
-
-    double cpu_time_used = ((double) (tRec - tLastRec)) / CLOCKS_PER_SEC;
-
     time_now = std::chrono::steady_clock::now();
     time_diff = std::chrono::duration_cast<std::chrono::milliseconds>(time_now - time_last);
     time_last = std::chrono::steady_clock::now();
 
-    std::string timeDiffStr = std::ctime(&timeDiff);
-    //std::cout << "Time Diff String: " << timeDiffAnsDouble << "\n";
-    //std::cout << "Time Diff String: " << cpu_time_used << "\n";
-    //std::cout << "Time Diff String: " << timeDiffStr << ":" << timeDiffAnsDouble << ":" << std::ctime(&tRec) << ":" << std::ctime(&tLastRec) << "\n";
     std::cout << "Time Diff String: " << time_diff.count() << "\n";
 
     if (!error)
