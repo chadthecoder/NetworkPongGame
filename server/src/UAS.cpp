@@ -80,7 +80,7 @@ void UAS::handle_receive(const asio::error_code& error,
                 std::placeholders::_1,
                 std::placeholders::_2));
 
-                return;//right one?
+                //return;//right one?
             }
             else
             {
