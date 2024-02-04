@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <set>
+#include <chrono>
 
 #include <utils.hpp>
 
@@ -29,6 +30,8 @@ private:
 
   std::time_t recTime, lastRecTime, timeDiff;
   clock_t tRec, tLastRec, tDiff;
+  std::chrono::_V2::steady_clock::time_point time_last, time_now;
+  std::chrono::milliseconds time_diff;
 
   double timeDiffAnsDouble;
 
