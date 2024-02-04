@@ -30,8 +30,12 @@ void UAS::handle_receive(const asio::error_code& error,
     tDiff = tRec-tLastRec;
     timeDiffAnsDouble = difftime(tRec, tLastRec);
 
+    double cpu_time_used = ((double) (tRec - tLastRec)) / CLOCKS_PER_SEC;
+
     std::string timeDiffStr = std::ctime(&timeDiff);
-    std::cout << "Time Diff String: " << timeDiffAnsDouble << "\n";
+    //std::cout << "Time Diff String: " << timeDiffAnsDouble << "\n";
+    //std::cout << "Time Diff String: " << cpu_time_used << "\n";
+    std::cout << "Time Diff String: " << timeDiffStr << ":" << timeDiffAnsDouble << ":" << std::ctime(&tRec) << ":" << std::ctime(&tLastRec) << "\n";
 
     if (!error)
     {
