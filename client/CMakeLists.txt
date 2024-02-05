@@ -8,7 +8,7 @@ find_package(SDL2 CONFIG REQUIRED)
 find_package(SDL2_image CONFIG REQUIRED)
 
 set(CPP_DIR src)
-set(CPP ${CPP_DIR}/client.cpp ${CPP_DIR}/Pong.cpp ${CPP_DIR}/ClientNet.cpp)
+set(CPP ${CPP_DIR}/client.cpp ${CPP_DIR}/Pong.cpp ${CPP_DIR}/ClientNet.cpp ${CPP_DIR}/utils.cpp ${CPP_DIR}/NetworkMessage.cpp)
 
 include_directories(include)
 include_directories(../lib/asio/asio/include)
