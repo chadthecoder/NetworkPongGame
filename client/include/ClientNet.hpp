@@ -6,6 +6,8 @@
 #include <iostream>
 #include <stdexcept>
 
+#include <NetworkMessage.hpp>
+
 struct SEND_REC_STRUCT
 {
         int sendAns;
@@ -31,6 +33,8 @@ public:
     ~ClientNet();
 
     SEND_REC_STRUCT SendAndRecMessage(std::string mess);
+    //will transfer to string and call SEND_REC_STRUCT SendAndRecMessage(std::string mess);
+    SEND_REC_STRUCT SendAndRecMessage(NetworkMessage mess);
 
 private:
     int SendMessage(std::string mess);

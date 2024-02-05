@@ -21,6 +21,7 @@
 #include <cmath>
 #include <cstdlib>
 
+#include <utils.hpp>
 #include <NetworkMessage.hpp>
 #include <ClientNet.hpp>
 
@@ -194,7 +195,6 @@ public:
   bool getIsRunning();
 
 private:
-  void push4char(std::string& pushString, int pushInt);
   bool checkHorizWallColl(Ball ball);
 
   void UpdateScore();

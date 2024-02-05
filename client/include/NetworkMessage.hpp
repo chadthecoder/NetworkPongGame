@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string>
 
 struct NetworkMessage //max 32 vars at 4 chars each, convert to binary?

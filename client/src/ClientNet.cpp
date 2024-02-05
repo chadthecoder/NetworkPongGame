@@ -9,6 +9,9 @@ ClientNet::~ClientNet()
 {
 }
 
+SEND_REC_STRUCT ClientNet::SendAndRecMessage(NetworkMessage mess)
+{}
+
 SEND_REC_STRUCT ClientNet::SendAndRecMessage(std::string mess)
 {
     SEND_REC_STRUCT ans;
