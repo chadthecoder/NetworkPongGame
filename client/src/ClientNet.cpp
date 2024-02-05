@@ -9,8 +9,38 @@ ClientNet::~ClientNet()
 {
 }
 
+//each var is 4 chars
+//1st variable: 0000==continue-game, 0001==left-wins, 0002==right-wins
+//2nd variable: 0000==no-points, 0001==left-point, 0002==right-point
+//3rd variable: left paddle x
+//4th variable: left paddle y
+//5th variable: right paddle x
+//6th variable: right paddle y
+//7th variable: 000-left score
+//8th variable: 000-right score
+//9th variable: game ball x
+//10th variable: game ball y
+//11th variable: game ball x velocity
+//12th variable: game ball y velocity
 SEND_REC_STRUCT ClientNet::SendAndRecMessage(NetworkMessage mess)
-{}
+{
+    std::string messString;
+
+    utils::push4char(messString, mess.win);
+    utils::push4char(messString, mess.point);
+    utils::push4char(messString, mess.leftPaddleX);
+    utils::push4char(messString, mess.leftPaddleY);
+    utils::push4char(messString, mess.rightPaddleX);
+    utils::push4char(messString, mess.rightPaddleY);
+    utils::push4char(messString, mess.leftScore);
+    utils::push4char(messString, mess.rightScore);
+    utils::push4char(messString, mess.gameballX);
+    utils::push4char(messString, mess.gameballY);
+    utils::push4char(messString, mess.gameballXVel);
+    utils::push4char(messString, mess.gameballYVel);
+
+    return SendAndRecMessage(messString);
+}
 
 SEND_REC_STRUCT ClientNet::SendAndRecMessage(std::string mess)
 {

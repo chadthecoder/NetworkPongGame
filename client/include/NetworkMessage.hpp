@@ -1,9 +1,13 @@
 #pragma once
 
 #include <string>
+#include <iostream>
 
+//need to overwrite << iostream
 struct NetworkMessage //max 32 vars at 4 chars each, convert to binary?
 {
+  friend std::ostream& operator<<(std::ostream& os, const NetworkMessage& mess);
+
   //1st variable: 0000==continue-game, 0001==left-wins, 0002==right-wins
   int win;
   //2nd variable: 0000==no-points, 0001==left-point, 0002==right-point

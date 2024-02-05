@@ -6,6 +6,7 @@
 #include <iostream>
 #include <stdexcept>
 
+#include <utils.hpp>
 #include <NetworkMessage.hpp>
 
 struct SEND_REC_STRUCT

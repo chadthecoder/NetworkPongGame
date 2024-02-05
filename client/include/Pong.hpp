@@ -21,7 +21,7 @@
 #include <cmath>
 #include <cstdlib>
 
-#include <utils.hpp>
+//#include <utils.hpp>
 #include <NetworkMessage.hpp>
 #include <ClientNet.hpp>
 
@@ -187,7 +187,7 @@ public:
   //25th-28th variable: game ball y
   //29th-32nd variable: game ball x velocity
   //33rd-36th variable: game ball y velocity
-  std::string UpdateGame();
+  NetworkMessage UpdateGame();
 
   void Render();
 

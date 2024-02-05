@@ -254,7 +254,20 @@ void Pong::ProcessInput()
   }
 }
 
-std::string Pong::UpdateGame()
+//each var is 4 chars
+//1st variable: 0000==continue-game, 0001==left-wins, 0002==right-wins
+//2nd variable: 0000==no-points, 0001==left-point, 0002==right-point
+//3rd variable: left paddle x
+//4th variable: left paddle y
+//5th variable: right paddle x
+//6th variable: right paddle y
+//7th variable: 000-left score
+//8th variable: 000-right score
+//9th variable: game ball x
+//10th variable: game ball y
+//11th variable: game ball x velocity
+//12th variable: game ball y velocity
+NetworkMessage Pong::UpdateGame()
 {
   NetworkMessage mess;
   mess.win = '0';
@@ -443,10 +456,10 @@ std::string Pong::UpdateGame()
                           << funny.y << " : "
                           << "\n";
 
-                utils::push4char(networkMessage, paddleU.x);
-                utils::push4char(networkMessage, paddleU.y);
-                utils::push4char(networkMessage, funny.x);
-                utils::push4char(networkMessage, funny.y);
+                //utils::push4char(networkMessage, paddleU.x);
+                //utils::push4char(networkMessage, paddleU.y);
+                //utils::push4char(networkMessage, funny.x);
+                //utils::push4char(networkMessage, funny.y);
 
                 mess.leftPaddleX = paddleU.x;
                 mess.leftPaddleY = paddleU.y;
@@ -454,8 +467,8 @@ std::string Pong::UpdateGame()
                 mess.rightPaddleY = funny.y;
 
 
-                //utils::push4char(networkMessage, this->leftPoints);
-                //utils::push4char(networkMessage, this->rightPoints);
+                ////utils::push4char(networkMessage, this->leftPoints);
+                ////utils::push4char(networkMessage, this->rightPoints);
 
                 std::string leftScoreStr = std::to_string(this->leftPoints);
                 networkMessage.push_back(leftScoreStr[0]);
@@ -467,10 +480,10 @@ std::string Pong::UpdateGame()
 
                 mess.rightScore = rightScoreStr[0];            
 
-                utils::push4char(networkMessage, gameBall.x);
-                utils::push4char(networkMessage, gameBall.y);
-                utils::push4char(networkMessage, gameBall.xVelocity);
-                utils::push4char(networkMessage, gameBall.yVelocity);
+                //utils::push4char(networkMessage, gameBall.x);
+                //utils::push4char(networkMessage, gameBall.y);
+                //utils::push4char(networkMessage, gameBall.xVelocity);
+                //utils::push4char(networkMessage, gameBall.yVelocity);
 
                 mess.gameballX = gameBall.x;
                 mess.gameballY = gameBall.y;
@@ -479,11 +492,13 @@ std::string Pong::UpdateGame()
 
                 //find way to send mess NetworkMessage obj to net.SendAndRecMessage()
 
-                SEND_REC_STRUCT fun = net.SendAndRecMessage(networkMessage);
+                //SEND_REC_STRUCT fun = net.SendAndRecMessage(networkMessage);
+
+                SEND_REC_STRUCT fun = net.SendAndRecMessage(mess);
                 fun.recString.erase(std::remove(fun.recString.begin(), fun.recString.end(), '\n'), fun.recString.cend());
                 std::cout << "rec message: " << sizeof(fun.recString) << " 12345 " << fun.recString << "\n";
 
-                return networkMessage;
+                return mess;
             }
 
 Paddle Pong::createPaddle(int xq, int yq, int widthq, int heightq, int directionq)

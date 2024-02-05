@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
         {
             //ClientNet net(ip, "1025");
             SEND_REC_STRUCT serverAns;
-            std::string updateGame;
+            NetworkMessage updateGame;
             
             while (game.getIsRunning())
             {
