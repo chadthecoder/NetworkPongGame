@@ -287,6 +287,10 @@ void Pong::ProcessInput()
 
 std::string Pong::UpdateGame()
 {
+  NetworkMessage mess;
+  mess.win = '0';
+  mess.point = '0';
+
   char var1='0', var2='0';
   //std::string paddlesLocation="0";
 
@@ -318,6 +322,7 @@ std::string Pong::UpdateGame()
     // gameBall.xVelocity *= -1;
 
     var2 = '2';
+    mess.point = '2';
   }
   else if ((gameBall.x >= (this->screenWidth - this->thickness)) && (gameBall.xVelocity > 0.0f))
   {
@@ -327,6 +332,7 @@ std::string Pong::UpdateGame()
     // gameBall.xVelocity *= -1;
 
     var2 = '1';
+    mess.point = '1';
   }
 
   // game over because one side has 7 points
@@ -400,6 +406,7 @@ std::string Pong::UpdateGame()
                     //std::cout << "not updategame\n" << getIsRunning() << "\n";
                     //break;
                     var1 = '0';
+                    mess.win = '0';
                 }
                 else if(CheckWin() == 2)
                 {
@@ -410,6 +417,7 @@ std::string Pong::UpdateGame()
                     //    << "recString: " << serverAns.recString << "\n";
                     //break;
                     var1 = '1';
+                    mess.win = '1';
                 }
                 else if(CheckWin() == 3)
                 {
@@ -420,6 +428,7 @@ std::string Pong::UpdateGame()
                     //    << "recString: " << serverAns.recString << "\n";
                     //break;
                     var1 = '2';
+                    mess.win = '2';
                 }
                 else 
                 {
@@ -430,6 +439,7 @@ std::string Pong::UpdateGame()
                     std::cout << "What happened?\n";
                     //break;
                     var1 = '3';
+                    mess.win = '3';
                 }
                 //Render();
                 //std::cout << "render done\n";
@@ -469,22 +479,36 @@ std::string Pong::UpdateGame()
                 push4char(networkMessage, funny.x);
                 push4char(networkMessage, funny.y);
 
+                mess.leftPaddleX = paddleU.x;
+                mess.leftPaddleY = paddleU.y;
+                mess.rightPaddleX = funny.x;
+                mess.rightPaddleY = funny.y;
+
+
                 //push4char(networkMessage, this->leftPoints);
                 //push4char(networkMessage, this->rightPoints);
 
                 std::string leftScoreStr = std::to_string(this->leftPoints);
                 networkMessage.push_back(leftScoreStr[0]);
 
+                mess.leftScore = leftScoreStr[0];
+
                 std::string rightScoreStr = std::to_string(this->rightPoints);
-                networkMessage.push_back(rightScoreStr[0]);                
+                networkMessage.push_back(rightScoreStr[0]);
+
+                mess.rightScore = rightScoreStr[0];            
 
                 push4char(networkMessage, gameBall.x);
                 push4char(networkMessage, gameBall.y);
                 push4char(networkMessage, gameBall.xVelocity);
                 push4char(networkMessage, gameBall.yVelocity);
 
-                //something here?
-                //this->
+                mess.gameballX = gameBall.x;
+                mess.gameballY = gameBall.y;
+                mess.gameballXVel = gameBall.xVelocity;
+                mess.gameballYVel = gameBall.yVelocity;
+
+                //find way to send mess NetworkMessage obj to net.SendAndRecMessage()
 
                 SEND_REC_STRUCT fun = net.SendAndRecMessage(networkMessage);
                 fun.recString.erase(std::remove(fun.recString.begin(), fun.recString.end(), '\n'), fun.recString.cend());

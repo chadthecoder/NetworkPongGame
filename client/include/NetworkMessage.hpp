@@ -1,15 +1,29 @@
-struct NetworkMessage
+#include <string>
+
+struct NetworkMessage //max 32 vars at 4 chars each, convert to binary?
 {
-  //1st variable: 0==continue-game, 1==left-wins, 2==right-wins
-  //2nd variable: 0==no-points, 1==left-point, 2==right-point
-  //3rd-6th variable: left paddle x
-  //7th-10th variable: left paddle y
-  //11th-14th variable: right paddle x
-  //15th-18th variable: right paddle y
-  //19th variable: left score
-  //20th variable: right score
-  //21st-24th variable: game ball x
-  //25th-28th variable: game ball y
-  //29th-32nd variable: game ball x velocity
-  //33rd-36th variable: game ball y velocity
+  //1st variable: 0000==continue-game, 0001==left-wins, 0002==right-wins
+  int win;
+  //2nd variable: 0000==no-points, 0001==left-point, 0002==right-point
+  int point;
+  //3rd variable: left paddle x
+  int leftPaddleX;
+  //4th variable: left paddle y
+  int leftPaddleY;
+  //5th variable: right paddle x
+  int rightPaddleX;
+  //6th variable: right paddle y
+  int rightPaddleY;
+  //7th variable: 000-left score
+  int leftScore;
+  //8th variable: 000-right score
+  int rightScore;
+  //9th variable: game ball x
+  int gameballX;
+  //10th variable: game ball y
+  int gameballY;
+  //11th variable: game ball x velocity
+  int gameballXVel;
+  //12th variable: game ball y velocity
+  int gameballYVel;
 };

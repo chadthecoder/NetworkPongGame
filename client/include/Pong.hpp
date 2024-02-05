@@ -21,6 +21,7 @@
 #include <cmath>
 #include <cstdlib>
 
+#include <NetworkMessage.hpp>
 #include <ClientNet.hpp>
 
 /* #define ASIO_STANDALONE
