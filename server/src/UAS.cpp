@@ -24,7 +24,7 @@ void UAS::handle_receive(const asio::error_code& error,
     time_diff = std::chrono::duration_cast<std::chrono::milliseconds>(time_now - time_last);
     time_last = std::chrono::steady_clock::now();
 
-    std::cout << "Time Diff String: " << time_diff.count() << "\n";
+    std::cout << "Time since last message: " << time_diff.count() << "\n";
 
     if (!error)
     {
