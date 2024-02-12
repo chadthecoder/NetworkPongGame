@@ -40,15 +40,32 @@ void UAS::handle_receive(const asio::error_code& error,
             unsigned short port = remote_endpoint_.port();
 
             bool clientIsInClients = false;
-            auto pos1 = clients.find(remote_endpoint_.address().to_string()+":"+std::to_string(port)+":1");
-            auto pos2 = clients.find(remote_endpoint_.address().to_string()+":"+std::to_string(port)+":2");
- 
-            if (pos1 == clients.end() && pos2 == clients.end()) clientIsInClients = false;
-            else clientIsInClients = true;
+            //auto pos1 = clients.find(remote_endpoint_.address().to_string()+":"+std::to_string(port)+":1");
+            //auto pos2 = clients.find(remote_endpoint_.address().to_string()+":"+std::to_string(port)+":2");
+
+            //if (pos1 == clients.end() && pos2 == clients.end()) clientIsInClients = false;
+            //else clientIsInClients = true;
+            std::string pos1, pos2;
+            //if clients.empty() clientIsInClients is already false
+            if(!clients.empty() && clients.size()==1)
+            {
+              pos1 = clients.front();
+              //pos2 should be pos2.empty()
+
+              clientIsInClients = true;
+            }
+            else if(!clients.empty() && clients.size()==2)
+            {
+              pos1 = clients.front();
+              pos2 = clients.back();
+
+              clientIsInClients = true;
+            }
 
             if(clients.size() == 0 && !clientIsInClients)
             {
-              clients.insert(remote_endpoint_.address().to_string()+":"+std::to_string(port)+":1");
+              //clients.insert(remote_endpoint_.address().to_string()+":"+std::to_string(port)+":1");
+              clients.push_back(remote_endpoint_.address().to_string()+":"+std::to_string(port)+":1");
               //messageStr += remote_endpoint_.address().to_string()+":"+std::to_string(port)+":1";
               messageStr.append(remote_endpoint_.address().to_string()+":"+std::to_string(port)+":1");
               //messageStr.append(remote_endpoint_.address().to_string());
@@ -58,7 +75,8 @@ void UAS::handle_receive(const asio::error_code& error,
             }
             else if(clients.size() == 1 && !clientIsInClients)
             {
-              clients.insert(remote_endpoint_.address().to_string()+":"+std::to_string(port)+":2");
+              //clients.insert(remote_endpoint_.address().to_string()+":"+std::to_string(port)+":2");
+              clients.push_back(remote_endpoint_.address().to_string()+":"+std::to_string(port)+":2");
               messageStr.append(remote_endpoint_.address().to_string()+":"+std::to_string(port)+":2");
             }
             else if(clients.size() >= 2 && !clientIsInClients)
@@ -87,12 +105,20 @@ void UAS::handle_receive(const asio::error_code& error,
             //add clients to send string and cout the clients
 
             std::cout << "Current clients are: "; 
-            std::set<std::string>::iterator itr;
-            for (itr = clients.begin(); itr != clients.end(); itr++)
+            //std::set<std::string>::iterator itr;
+            //for (itr = clients.begin(); itr != clients.end(); itr++)
+            //{
+            //  std::cout << *itr << ", ";
+            //}        
+            //std::cout << "\n";
+            if(!clients.empty() && clients.size()==1)
             {
-              std::cout << *itr << ", ";
-            }        
-            std::cout << "\n";
+              std::cout << clients.front() << "\n";
+            }
+            else if(!clients.empty() && clients.size()==2)
+            {
+              std::cout << clients.front() << ", " << clients.back() << "\n";
+            }            
 
       //socket_.async_send_to(asio::buffer(*message), remote_endpoint_,
       //    std::bind(&UAS::handle_send, this, message,

@@ -5,8 +5,9 @@
 #include <asio.hpp>
 
 #include <iostream>
-#include <set>
+//#include <set>
 //#include <chrono>
+//#include <vector>
 
 #include <utils.hpp>
 #include <Client.hpp>
@@ -34,5 +35,8 @@ private:
 
   double timeDiffAnsDouble;
 
-  std::set<std::string> clients;
+  //std::set<std::string> clients;
+  std::vector<std::string> clients;
+  std::vector<std::chrono::_V2::steady_clock::time_point> clients_time_last, clients_time_now;
+  std::vector<std::chrono::milliseconds> clients_time;
 };
